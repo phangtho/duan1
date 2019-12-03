@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
  */
 public class ShareHelper {
 
+    public static double chamDiem;
     public static final Image APP_ICON;
 
     static {

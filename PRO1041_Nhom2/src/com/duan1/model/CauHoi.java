@@ -82,5 +82,14 @@ public class CauHoi {
     public void setDapAnS3(String dapAnS3) {
         this.dapAnS3 = dapAnS3;
     }
+
+    public CauHoi(String deBai, String dapAn, String dapAnS1, String dapAnS2, String dapAnS3) {
+        
+        this.deBai = deBai;
+        this.dapAn = dapAn;
+        this.dapAnS1 = dapAnS1;
+        this.dapAnS2 = dapAnS2;
+        this.dapAnS3 = dapAnS3;
+    }
     
 }
