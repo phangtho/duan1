@@ -98,7 +98,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
 
         jButton6.setText(">>");
 
-        jButton7.setText(">>");
+        jButton7.setText("<<");
 
         jButton8.setText("|<");
 
