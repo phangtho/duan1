@@ -5,6 +5,7 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.CauHoiDAO;
 import com.duan1.model.CauHoi;
 import java.awt.Button;
 import java.beans.PropertyVetoException;
@@ -20,13 +21,33 @@ import java.util.List;
  * @author ASUS
  */
 public class ExamJFrame extends javax.swing.JInternalFrame {
-
+    CauHoiDAO dao = new CauHoiDAO();
     /**
      * Creates new form Exam
      * @throws java.beans.PropertyVetoException
      */
     public ExamJFrame() throws PropertyVetoException {
         initComponents();
+        load();
+    }
+    
+    void load(){
+        List<CauHoi> list = dao.select();
+        for (CauHoi ch : list) {
+                Object[] row = {
+                ch.getDeBai(),
+                ch.getDapAn(),
+                ch.getDapAnS1(),
+                ch.getDapAnS2(),
+                ch.getDapAnS3()
+                };
+        txaCauHoi.setText(ch.getDeBai());
+        jRadioButton1.setText(ch.getDapAn());
+        jRadioButton2.setText(ch.getDapAnS1());
+        jRadioButton3.setText(ch.getDapAnS2());
+        jRadioButton4.setText(ch.getDapAnS3());
+        }
+                
     }
     /**
      * This method is called from within the constructor to initialize the form.
