@@ -13,13 +13,20 @@ public class HocSinh {
     String ten;
     String email;
     String id;
-    String pass;
+    String matKhau;
 
-    public HocSinh(String ten, String email, String id, String pass) {
+    public HocSinh(String ten, String email, String id,String matKhau) {
         this.ten = ten;
         this.email = email;
         this.id = id;
-        this.pass = pass;
+        this.matKhau = matKhau;
+    }
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public HocSinh() {
@@ -50,12 +57,6 @@ public class HocSinh {
         this.id = id;
     }
 
-    public String getPass() {
-        return pass;
-    }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
     
 }

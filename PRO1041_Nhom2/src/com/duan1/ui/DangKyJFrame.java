@@ -7,15 +7,16 @@ package com.duan1.ui;
 
 /**
  *
- * @author ASUS
+ * @author Viet Anh
  */
-public class DangKyJFrame extends javax.swing.JInternalFrame {
+public class DangKyJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form DangKy
+     * Creates new form DangKy1JFrame
      */
     public DangKyJFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -27,9 +28,6 @@ public class DangKyJFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txTenHS = new javax.swing.JTextField();
         txUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -38,25 +36,16 @@ public class DangKyJFrame extends javax.swing.JInternalFrame {
         txEmail = new javax.swing.JTextField();
         btDangKy = new javax.swing.JButton();
         btNew = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btQuayLai = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         txPass = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
         txXacNhan = new javax.swing.JPasswordField();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Họ tên học sinh:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 0, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("ĐĂNG KÝ");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Tên đăng nhập:");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(501, 387));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Mật khẩu:");
@@ -79,8 +68,24 @@ public class DangKyJFrame extends javax.swing.JInternalFrame {
         btNew.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btNew.setText("Làm mới");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Họ tên học sinh:");
+
         btQuayLai.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btQuayLai.setText("Quay lại");
+        btQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btQuayLaiActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("ĐĂNG KÝ");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Tên đăng nhập:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,7 +158,7 @@ public class DangKyJFrame extends javax.swing.JInternalFrame {
                     .addComponent(btDangKy)
                     .addComponent(btNew)
                     .addComponent(btQuayLai))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,6 +168,46 @@ public class DangKyJFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txEmailActionPerformed
 
+    private void btQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQuayLaiActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btQuayLaiActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DangKyJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DangKyJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DangKyJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DangKyJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DangKyJFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDangKy;

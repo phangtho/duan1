@@ -20,14 +20,14 @@ public class HocSinhDAO {
         String sql="insert into hocSinh(id,matKhau,ten,email) values (?,?,?,?)";
         JDBCHelper.executeUpdate(sql,
         model.getId(),
-        model.getPass(),
+        model.getMatKhau(),
         model.getTen(),
         model.getEmail());
     }
     public void update(HocSinh model){
         String sql="UPDATE hocSinh SET matKhau=?, ten=?, email=? WHERE id=?";
         JDBCHelper.executeUpdate(sql,
-        model.getPass(),
+        model.getMatKhau(),
         model.getTen(),
         model.getEmail(),
         model.getId());
@@ -35,6 +35,11 @@ public class HocSinhDAO {
     public void delete(String id){
         String sql="DELETE FROM HocSinh WHERE id=?";
         JDBCHelper.executeUpdate(sql, id);
+    }
+    public HocSinh findByID(String id){
+        String sql = "SELECT * FROM HocSinh WHERE id=?";
+        List<HocSinh> list = select(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
     }
     public List<HocSinh> select(){
         String sql="SELECT * FROM hocSinh";
@@ -63,7 +68,7 @@ public class HocSinhDAO {
     private HocSinh readFromResultSet(ResultSet rs) throws SQLException{
         HocSinh model=new HocSinh();
         model.setId(rs.getString("id"));
-        model.setPass(rs.getString("matKhau"));
+        model.setMatKhau(rs.getString("matKhau"));
         model.setTen(rs.getString("ten"));
         model.setEmail(rs.getString("email"));
     return model;

@@ -6,6 +6,7 @@
 package com.duan1.ui;
 
 import com.duan1.helper.DialogHelper;
+import com.duan1.helper.ShareHelper;
 import com.duan1.ui.CauHoiJFrame;
 import com.duan1.ui.ExamJFrame;
 import com.duan1.ui.ThongKeJFrame;
@@ -27,7 +28,8 @@ public class MainJFrame extends javax.swing.JFrame {
         setTitle("Hệ thống quản lý thi");
         setLocationRelativeTo(null);
         tab.setEnabledAt(1, true);
-
+        setIconImage(ShareHelper.APP_ICON);
+        this.openLogin();
     }
 
     /**
@@ -189,6 +191,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnDangXuat.setMinimumSize(new java.awt.Dimension(105, 65));
         btnDangXuat.setPreferredSize(new java.awt.Dimension(105, 65));
         btnDangXuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnDangXuat);
         jToolBar2.add(jSeparator3);
 
@@ -524,6 +531,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Log out.png"))); // NOI18N
         mniDangXuat.setText("Đăng xuất");
+        mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangXuatActionPerformed(evt);
+            }
+        });
         mnuHeThong.add(mniDangXuat);
         mnuHeThong.add(jSeparator1);
 
@@ -622,6 +634,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnDangXuatGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatGVActionPerformed
         // TODO add your handling code here:
+        logoff();
     }//GEN-LAST:event_btnDangXuatGVActionPerformed
 
     private void btnCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCauHoiActionPerformed
@@ -639,8 +652,6 @@ public class MainJFrame extends javax.swing.JFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_btnLBTheoMonActionPerformed
 
     private void btnDiemTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiemTongHopActionPerformed
@@ -656,7 +667,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         exit();
-
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnKetQuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetQuaActionPerformed
@@ -671,7 +681,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void mniDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangNhapActionPerformed
         // TODO add your handling code here:
-        new DangNhapJDialog(this, true).setVisible(true); 
+        openLogin();
     }//GEN-LAST:event_mniDangNhapActionPerformed
 
     private void mniQLiHocSinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLiHocSinhActionPerformed
@@ -689,7 +699,6 @@ public class MainJFrame extends javax.swing.JFrame {
         GiaoVienJFrame gv = new GiaoVienJFrame();
         jDesktopPane2.add(gv);
         gv.setVisible(true);
-        
     }//GEN-LAST:event_mniQLiGiaoVienActionPerformed
 
     private void btnThoat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoat2ActionPerformed
@@ -711,6 +720,16 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         openThongKe(2);
     }//GEN-LAST:event_mniTKDiemTongHopActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        // TODO add your handling code here:
+        logoff();
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
+        // TODO add your handling code here:
+        logoff();
+    }//GEN-LAST:event_mniDangXuatActionPerformed
     public void exit() {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn kết thúc?")) {
             System.exit(0);
@@ -736,6 +755,15 @@ public class MainJFrame extends javax.swing.JFrame {
         jDesktopPane2.add(qlhs);
         qlhs.setVisible(true);
     }
+    public void logoff(){
+        ShareHelper.logoff();
+        this.openLogin();
+    }
+    public void openLogin(){
+        DangNhapJFrame dn = new DangNhapJFrame();
+        dn.setVisible(true);
+    }
+
 /**
  * @param args the command line arguments
  */
