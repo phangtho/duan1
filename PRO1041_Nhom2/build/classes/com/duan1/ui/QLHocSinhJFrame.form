@@ -262,7 +262,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton8">
