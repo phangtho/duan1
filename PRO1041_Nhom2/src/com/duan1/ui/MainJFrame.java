@@ -5,6 +5,7 @@
  */
 package com.duan1.ui;
 
+import com.duan1.helper.DialogHelper;
 import com.duan1.ui.CauHoiJFrame;
 import com.duan1.ui.ExamJFrame;
 import com.duan1.ui.ThongKeJFrame;
@@ -26,7 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
         setTitle("Hệ thống quản lý thi");
         setLocationRelativeTo(null);
         tab.setEnabledAt(1, true);
-        
+
     }
 
     /**
@@ -172,6 +173,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnKetQua.setMinimumSize(new java.awt.Dimension(105, 65));
         btnKetQua.setPreferredSize(new java.awt.Dimension(105, 65));
         btnKetQua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnKetQua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetQuaActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnKetQua);
         jToolBar2.add(jSeparator12);
 
@@ -194,6 +200,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnThoat.setMinimumSize(new java.awt.Dimension(105, 65));
         btnThoat.setPreferredSize(new java.awt.Dimension(105, 65));
         btnThoat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnThoat);
         jToolBar2.add(jSeparator16);
 
@@ -423,6 +434,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnThoat2.setMinimumSize(new java.awt.Dimension(105, 65));
         btnThoat2.setPreferredSize(new java.awt.Dimension(105, 65));
         btnThoat2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThoat2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoat2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnThoat2);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -480,6 +496,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         tab.addTab("Giáo viên", hocsinh);
 
+        jDesktopPane2.setLayer(tab, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
@@ -490,7 +508,6 @@ public class MainJFrame extends javax.swing.JFrame {
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tab)
         );
-        jDesktopPane2.setLayer(tab, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         getContentPane().add(jDesktopPane2, java.awt.BorderLayout.CENTER);
 
@@ -498,6 +515,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mniDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Key.png"))); // NOI18N
         mniDangNhap.setText("Đăng nhập");
+        mniDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangNhapActionPerformed(evt);
+            }
+        });
         mnuHeThong.add(mniDangNhap);
 
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Log out.png"))); // NOI18N
@@ -512,6 +534,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mniThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Stop.png"))); // NOI18N
         mniThoat.setText("Thoát ứng dụng");
+        mniThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniThoatActionPerformed(evt);
+            }
+        });
         mnuHeThong.add(mniThoat);
 
         jMenuBar1.add(mnuHeThong);
@@ -520,16 +547,31 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mniQLiHocSinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Conference.png"))); // NOI18N
         mniQLiHocSinh.setText("Học sinh");
+        mniQLiHocSinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLiHocSinhActionPerformed(evt);
+            }
+        });
         mnuQuanLy.add(mniQLiHocSinh);
         mnuQuanLy.add(jSeparator14);
 
         mniQLiCauHoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Address book.png"))); // NOI18N
         mniQLiCauHoi.setText("Câu hỏi");
+        mniQLiCauHoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLiCauHoiActionPerformed(evt);
+            }
+        });
         mnuQuanLy.add(mniQLiCauHoi);
         mnuQuanLy.add(jSeparator15);
 
         mniQLiGiaoVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Clien list.png"))); // NOI18N
         mniQLiGiaoVien.setText("Giáo viên");
+        mniQLiGiaoVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLiGiaoVienActionPerformed(evt);
+            }
+        });
         mnuQuanLy.add(mniQLiGiaoVien);
 
         jMenuBar1.add(mnuQuanLy);
@@ -538,14 +580,29 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mniTKNguoiThi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/User group.png"))); // NOI18N
         mniTKNguoiThi.setText("Người thi");
+        mniTKNguoiThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTKNguoiThiActionPerformed(evt);
+            }
+        });
         mnuThongKe.add(mniTKNguoiThi);
 
         mniTKBangDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Certificate.png"))); // NOI18N
         mniTKBangDiem.setText("Bảng điểm");
+        mniTKBangDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTKBangDiemActionPerformed(evt);
+            }
+        });
         mnuThongKe.add(mniTKBangDiem);
 
         mniTKDiemTongHop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Bar chart.png"))); // NOI18N
         mniTKDiemTongHop.setText("Điểm tổng hợp");
+        mniTKDiemTongHop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTKDiemTongHopActionPerformed(evt);
+            }
+        });
         mnuThongKe.add(mniTKDiemTongHop);
 
         jMenuBar1.add(mnuThongKe);
@@ -569,45 +626,120 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCauHoiActionPerformed
         // TODO add your handling code here:
-
-           CauHoiJFrame form = new CauHoiJFrame();
-               jDesktopPane2.add(form);
-               form.setVisible(true);
-               
-        
+        openQLCauHoi();
     }//GEN-LAST:event_btnCauHoiActionPerformed
 
     private void btnLBTheoMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBTheoMonActionPerformed
         // TODO add your handling code here:
-            
+
         try {
-            ExamJFrame form= new ExamJFrame();
-              jDesktopPane2.add(form);
-               form.setVisible(true);
+            ExamJFrame form = new ExamJFrame();
+            jDesktopPane2.add(form);
+            form.setVisible(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-             
-     
+
+
     }//GEN-LAST:event_btnLBTheoMonActionPerformed
 
     private void btnDiemTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiemTongHopActionPerformed
         // TODO add your handling code here:
-
-               ThongKeJFrame form = new ThongKeJFrame();
-              jDesktopPane2.add(form);
-               form.setVisible(true);
-     
+        openThongKe(2);
     }//GEN-LAST:event_btnDiemTongHopActionPerformed
 
     private void btnHocSinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHocSinhActionPerformed
         // TODO add your handling code here:
+        openQLHocSinh();
     }//GEN-LAST:event_btnHocSinhActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        exit();
+
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnKetQuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetQuaActionPerformed
+        // TODO add your handling code here:
+        openKetQua();
+    }//GEN-LAST:event_btnKetQuaActionPerformed
+
+    private void mniThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThoatActionPerformed
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_mniThoatActionPerformed
+
+    private void mniDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangNhapActionPerformed
+        // TODO add your handling code here:
+        new DangNhapJDialog(this, true).setVisible(true); 
+    }//GEN-LAST:event_mniDangNhapActionPerformed
+
+    private void mniQLiHocSinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLiHocSinhActionPerformed
+        // TODO add your handling code here:
+        openQLHocSinh();
+    }//GEN-LAST:event_mniQLiHocSinhActionPerformed
+
+    private void mniQLiCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLiCauHoiActionPerformed
+        // TODO add your handling code here:
+        openQLCauHoi();
+    }//GEN-LAST:event_mniQLiCauHoiActionPerformed
+
+    private void mniQLiGiaoVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLiGiaoVienActionPerformed
+        // TODO add your handling code here:
+        GiaoVienJFrame gv = new GiaoVienJFrame();
+        jDesktopPane2.add(gv);
+        gv.setVisible(true);
+        
+    }//GEN-LAST:event_mniQLiGiaoVienActionPerformed
+
+    private void btnThoat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoat2ActionPerformed
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_btnThoat2ActionPerformed
+
+    private void mniTKNguoiThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTKNguoiThiActionPerformed
+        // TODO add your handling code here:
+        openThongKe(0);
+    }//GEN-LAST:event_mniTKNguoiThiActionPerformed
+
+    private void mniTKBangDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTKBangDiemActionPerformed
+        // TODO add your handling code here:
+        openThongKe(1);
+    }//GEN-LAST:event_mniTKBangDiemActionPerformed
+
+    private void mniTKDiemTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTKDiemTongHopActionPerformed
+        // TODO add your handling code here:
+        openThongKe(2);
+    }//GEN-LAST:event_mniTKDiemTongHopActionPerformed
+    public void exit() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn kết thúc?")) {
+            System.exit(0);
+        }
+    }
+    public void openKetQua() {
+        KetQuaJFrame kq = new KetQuaJFrame();
+        jDesktopPane2.add(kq);
+        kq.setVisible(true);
+    }
+    public void openQLCauHoi() {
+        CauHoiJFrame ch = new CauHoiJFrame();
+        jDesktopPane2.add(ch);
+        ch.setVisible(true);
+    }
+    public void openThongKe(int index){
+        ThongKeJFrame tk = new ThongKeJFrame(index);
+        jDesktopPane2.add(tk);
+        tk.setVisible(true);
+    }
+    public void openQLHocSinh() {
+        QLHocSinhJFrame qlhs = new QLHocSinhJFrame();
+        jDesktopPane2.add(qlhs);
+        qlhs.setVisible(true);
+    }
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -618,16 +750,28 @@ public class MainJFrame extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainJFrame.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

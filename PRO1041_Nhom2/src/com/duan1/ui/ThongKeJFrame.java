@@ -14,8 +14,9 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form NguoiThi
      */
-    public ThongKeJFrame() {
+    public ThongKeJFrame(int index) {
         initComponents();
+        jTabbedPane1.setSelectedIndex(index);
     }
 
     /**

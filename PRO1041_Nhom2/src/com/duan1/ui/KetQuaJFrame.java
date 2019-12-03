@@ -27,6 +27,7 @@ public class KetQuaJFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbLichSu = new javax.swing.JTable();
@@ -66,8 +67,10 @@ public class KetQuaJFrame extends javax.swing.JInternalFrame {
             tbLichSu.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        buttonGroup1.add(rbXuong);
         rbXuong.setText("Điểm từ cao xuống thấp");
 
+        buttonGroup1.add(rbLen);
         rbLen.setText("Điểm từ thấp lên cao");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -104,6 +107,7 @@ public class KetQuaJFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbLen;
