@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/HelpJDialog.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/KetQuaJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/DoiMatKhauJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/DangKyJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/NewJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/MainJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/DangNhapJDialog.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/GiaoVienJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/QLHocSinhJFrame.java</file>
-            <file>file:/C:/Users/Viet%20Anh/Documents/NetBeansProjects/PRO1041_Nhom2/src/com/duan1/ui/CauHoiJFrame.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/DAO/GiaoVienDAO.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/ui/DoiMatKhauJFrame.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/ui/ExamJFrame.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/ui/DangNhapJDialog.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/ui/DangKyJFrame.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/DAO/HocSinhDAO.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/ui/MainJFrame.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/helper/JDBCHelper.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/model/HocSinh.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/helper/ShareHelper.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/model/KetQua.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/model/CauHoi.java</file>
+            <file>file:/C:/Users/ABC/Documents/GitHub/duan1/PRO1041_Nhom2/src/com/duan1/ui/HelpJDialog.java</file>
         </group>
     </open-files>
 </project-private>
