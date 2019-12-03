@@ -14,16 +14,18 @@ public class HocSinh {
     String email;
     String id;
     String pass;
-    double diem;
 
-    public double getDiem() {
-        return diem;
+    public HocSinh(String ten, String email, String id, String pass) {
+        this.ten = ten;
+        this.email = email;
+        this.id = id;
+        this.pass = pass;
     }
 
-    public void setDiem(double diem) {
-        this.diem = diem;
-    }
+    public HocSinh() {
+        }
 
+    
     public String getTen() {
         return ten;
     }

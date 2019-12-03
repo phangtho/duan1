@@ -10,10 +10,30 @@ package com.duan1.model;
  * @author QUAN
  */
 public class KetQua {
+    int id;
     String idHSinh;
     double diem;
     String ngayLam;
     String baiLam;
+
+    public KetQua(int id, String idHSinh, double diem, String ngayLam, String baiLam) {
+        this.id = id;
+        this.idHSinh = idHSinh;
+        this.diem = diem;
+        this.ngayLam = ngayLam;
+        this.baiLam = baiLam;
+    }
+    
+    public KetQua(){
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getIdHSinh() {
         return idHSinh;

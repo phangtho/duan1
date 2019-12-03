@@ -5,10 +5,67 @@
  */
 package com.duan1.DAO;
 
+import com.duan1.helper.JDBCHelper;
+import java.util.List;
+import com.duan1.model.HocSinh;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 /**
  *
  * @author QUAN
  */
 public class HocSinhDAO {
-    
+    public void insert(HocSinh model){
+        String sql="insert into hocSinh(id,matKhau,ten,email) values (?,?,?,?)";
+        JDBCHelper.executeUpdate(sql,
+        model.getId(),
+        model.getPass(),
+        model.getTen(),
+        model.getEmail());
+    }
+    public void update(HocSinh model){
+        String sql="UPDATE hocSinh SET matKhau=?, ten=?, email=? WHERE id=?";
+        JDBCHelper.executeUpdate(sql,
+        model.getPass(),
+        model.getTen(),
+        model.getEmail(),
+        model.getId());
+    }
+    public void delete(String id){
+        String sql="DELETE FROM HocSinh WHERE id=?";
+        JDBCHelper.executeUpdate(sql, id);
+    }
+    public List<HocSinh> select(){
+        String sql="SELECT * FROM hocSinh";
+        return select(sql);
+    }
+    private List<HocSinh> select(String sql, Object...args){
+        List<HocSinh> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+        try {
+            rs = JDBCHelper.executeQuery(sql, args);
+        while(rs.next()){
+            HocSinh model = readFromResultSet(rs);
+            list.add(model);
+            }
+        }
+        finally{
+            rs.getStatement().getConnection().close();
+        }
+        }
+        catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    return list;
+    }
+    private HocSinh readFromResultSet(ResultSet rs) throws SQLException{
+        HocSinh model=new HocSinh();
+        model.setId(rs.getString("id"));
+        model.setPass(rs.getString("matKhau"));
+        model.setTen(rs.getString("ten"));
+        model.setEmail(rs.getString("email"));
+    return model;
+    }
 }

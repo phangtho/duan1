@@ -19,6 +19,20 @@ public class CauHoi {
     String dapAnS2;
     String dapAnS3;
 
+    public CauHoi(int id, String mon, String deTH, String deBai, String dapAn, String dapAnS1, String dapAnS2, String dapAnS3) {
+        this.id = id;
+        this.mon = mon;
+        this.deTH = deTH;
+        this.deBai = deBai;
+        this.dapAn = dapAn;
+        this.dapAnS1 = dapAnS1;
+        this.dapAnS2 = dapAnS2;
+        this.dapAnS3 = dapAnS3;
+    }
+
+    public CauHoi(){
+    }
+    
     public int getId() {
         return id;
     }
