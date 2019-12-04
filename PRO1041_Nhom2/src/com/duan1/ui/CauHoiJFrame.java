@@ -47,8 +47,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         txDapAnSai2 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txDapAnSai3 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txXepLoai = new javax.swing.JTextField();
         btAdd = new javax.swing.JButton();
         btUpdate = new javax.swing.JButton();
         btDelete = new javax.swing.JButton();
@@ -62,11 +60,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         cbTimMon = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbMon = new javax.swing.JTable();
-        pTongHop = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        cbTimDe = new javax.swing.JComboBox();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbTongHop = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -97,8 +90,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         jLabel8.setText("Đáp án sai 2");
 
         jLabel9.setText("Đáp án sai 3");
-
-        jLabel10.setText("Xếp loại");
 
         btAdd.setText("Thêm");
 
@@ -134,9 +125,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                     .addComponent(cbDe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addComponent(jScrollPane1)
             .addGroup(pCapNhatLayout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pCapNhatLayout.createSequentialGroup()
                 .addComponent(btAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btUpdate)
@@ -168,7 +156,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addComponent(txDapAnSai1)
                     .addComponent(txDapAnSai3)))
-            .addComponent(txXepLoai)
         );
         pCapNhatLayout.setVerticalGroup(
             pCapNhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,11 +192,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                 .addGroup(pCapNhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txDapAnSai2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txDapAnSai3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txXepLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(89, 89, 89)
                 .addGroup(pCapNhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdd)
                     .addComponent(btUpdate)
@@ -219,14 +202,12 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                     .addComponent(btNext)
                     .addComponent(btPrev)
                     .addComponent(btFirst))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         tabs.addTab("CẬP NHẬT", pCapNhat);
 
         jLabel11.setText("MÔN");
-
-        cbTimMon.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tbMon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -280,63 +261,11 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(cbTimMon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabs.addTab("MÔN ", pMon);
-
-        jLabel12.setText("ĐỀ TỔNG HỢP");
-
-        cbTimDe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        tbTongHop.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ĐỀ TH", "TÊN ĐỀ", "NGƯỜI TẠO", "NGÀY TẠO"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(tbTongHop);
-        if (tbTongHop.getColumnModel().getColumnCount() > 0) {
-            tbTongHop.getColumnModel().getColumn(0).setResizable(false);
-            tbTongHop.getColumnModel().getColumn(1).setResizable(false);
-            tbTongHop.getColumnModel().getColumn(2).setResizable(false);
-            tbTongHop.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        javax.swing.GroupLayout pTongHopLayout = new javax.swing.GroupLayout(pTongHop);
-        pTongHop.setLayout(pTongHopLayout);
-        pTongHopLayout.setHorizontalGroup(
-            pTongHopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTongHopLayout.createSequentialGroup()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbTimDe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
-        );
-        pTongHopLayout.setVerticalGroup(
-            pTongHopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTongHopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pTongHopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(cbTimDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        tabs.addTab("TỔNG HỢP", pTongHop);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -357,7 +286,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
 
@@ -376,12 +305,9 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btUpdate;
     private javax.swing.JComboBox cbDe;
     private javax.swing.JComboBox cbMon;
-    private javax.swing.JComboBox cbTimDe;
     private javax.swing.JComboBox cbTimMon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -392,19 +318,15 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel pCapNhat;
     private javax.swing.JPanel pMon;
-    private javax.swing.JPanel pTongHop;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbMon;
-    private javax.swing.JTable tbTongHop;
     private javax.swing.JTextArea txCauHoi;
     private javax.swing.JTextField txDapAn;
     private javax.swing.JTextField txDapAnSai1;
     private javax.swing.JTextField txDapAnSai2;
     private javax.swing.JTextField txDapAnSai3;
     private javax.swing.JTextField txMaCH;
-    private javax.swing.JTextField txXepLoai;
     // End of variables declaration//GEN-END:variables
 }

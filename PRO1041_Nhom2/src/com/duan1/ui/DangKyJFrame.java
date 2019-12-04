@@ -5,18 +5,24 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.HocSinhDAO;
+import com.duan1.helper.DialogHelper;
+import com.duan1.model.HocSinh;
+import java.awt.Dialog;
+
 /**
  *
  * @author Viet Anh
  */
 public class DangKyJFrame extends javax.swing.JFrame {
-
+    HocSinhDAO dao = new HocSinhDAO();
     /**
      * Creates new form DangKy1JFrame
      */
     public DangKyJFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        setSize(512, 355);
     }
 
     /**
@@ -33,7 +39,6 @@ public class DangKyJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txEmail = new javax.swing.JTextField();
         btDangKy = new javax.swing.JButton();
         btNew = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -42,6 +47,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
         txPass = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         txXacNhan = new javax.swing.JPasswordField();
+        txEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -56,17 +62,21 @@ public class DangKyJFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Email:");
 
-        txEmail.addActionListener(new java.awt.event.ActionListener() {
+        btDangKy.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btDangKy.setText("Đăng ký");
+        btDangKy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txEmailActionPerformed(evt);
+                btDangKyActionPerformed(evt);
             }
         });
 
-        btDangKy.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btDangKy.setText("Đăng ký");
-
         btNew.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btNew.setText("Làm mới");
+        btNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNewActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Họ tên học sinh:");
@@ -92,41 +102,35 @@ public class DangKyJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txPass)
-                                    .addComponent(txUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                                    .addComponent(txTenHS, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txEmail)
+                                    .addComponent(txPass)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btDangKy)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btNew)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(65, 65, 65)
                                         .addComponent(btQuayLai))
-                                    .addComponent(txEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 18, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addContainerGap())
+                                    .addComponent(txUser)
+                                    .addComponent(txTenHS)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 102, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,30 +156,63 @@ public class DangKyJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDangKy)
                     .addComponent(btNew)
                     .addComponent(btQuayLai))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txEmailActionPerformed
 
     private void btQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQuayLaiActionPerformed
         // TODO add your handling code here:
         openLogin();
         this.dispose();
     }//GEN-LAST:event_btQuayLaiActionPerformed
+
+    private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btNewActionPerformed
+
+    private void btDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangKyActionPerformed
+        // TODO add your handling code here:
+        HocSinh model = getModel();
+        String confirm = new String(txXacNhan.getPassword());
+        if(confirm.equals(model.getMatKhau())){
+            try{
+            dao.insert(model);
+            this.clear();
+            DialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e ) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+            }
+        } else {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }//GEN-LAST:event_btDangKyActionPerformed
     public void openLogin(){
         DangNhapJFrame dk = new DangNhapJFrame();
         dk.setVisible(true);
+    }
+    HocSinh getModel() {
+        HocSinh model = new HocSinh();
+        model.setTen(txTenHS.getText());
+        model.setId(txUser.getText());
+        model.setMatKhau(new String(txXacNhan.getPassword()));
+        model.setEmail(txEmail.getText());
+        return model;
+    }
+    public void clear() {
+        txTenHS.setText("");
+        txEmail.setText("");
+        txPass.setText("");
+        txXacNhan.setText("");
+        txUser.setText("");
     }
     /**
      * @param args the command line arguments

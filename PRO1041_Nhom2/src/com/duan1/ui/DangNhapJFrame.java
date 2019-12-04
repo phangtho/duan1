@@ -47,7 +47,6 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         txPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(563, 282));
         setPreferredSize(new java.awt.Dimension(563, 282));
 
@@ -202,8 +201,6 @@ public class DangNhapJFrame extends javax.swing.JFrame {
                     ShareHelper.USER = hocSinh; 
                     DialogHelper.alert(this, "Đăng nhập thành công!"); 
                     openMain();
-                    this.dispose(); 
-                    
                 } 
                 else{
                     DialogHelper.alert(this, "Sai mật khẩu!");

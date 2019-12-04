@@ -760,7 +760,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.openLogin();
     }
     public void openLogin(){
-        new DangNhapJDialog(this, true).setVisible(true); 
+       this.dispose();
     }
 
 /**
