@@ -43,7 +43,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txXacNhan = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(501, 387));
 
@@ -170,9 +170,13 @@ public class DangKyJFrame extends javax.swing.JFrame {
 
     private void btQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQuayLaiActionPerformed
         // TODO add your handling code here:
+        openLogin();
         this.dispose();
     }//GEN-LAST:event_btQuayLaiActionPerformed
-
+    public void openLogin(){
+        DangNhapJFrame dk = new DangNhapJFrame();
+        dk.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */

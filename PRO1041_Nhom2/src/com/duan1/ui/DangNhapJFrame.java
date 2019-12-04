@@ -9,6 +9,7 @@ import com.duan1.DAO.HocSinhDAO;
 import com.duan1.helper.DialogHelper;
 import com.duan1.helper.ShareHelper;
 import com.duan1.model.HocSinh;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +47,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         txPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(563, 282));
         setPreferredSize(new java.awt.Dimension(563, 282));
 
@@ -174,6 +176,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
     private void btDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangKyActionPerformed
         // TODO add your handling code here:
         openDangKy();
+        this.dispose();
     }//GEN-LAST:event_btDangKyActionPerformed
 
     private void txPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txPassActionPerformed
@@ -192,16 +195,18 @@ public class DangNhapJFrame extends javax.swing.JFrame {
           String hsid = txUser.getText(); 
         String matKhau = new String(txPass.getPassword()); 
         try { 
-            HocSinh hocSinh = dao.findByID(hsid); 
+            HocSinh hocSinh = dao.findByID(hsid);
             if(hocSinh != null){ 
-                String matKhau2 = hocSinh.getMatKhau(); 
+                String matKhau2 = hocSinh.getMatKhau().trim(); 
                 if(matKhau.equals(matKhau2)){ 
                     ShareHelper.USER = hocSinh; 
                     DialogHelper.alert(this, "Đăng nhập thành công!"); 
+                    openMain();
                     this.dispose(); 
+                    
                 } 
-                else{ 
-                    DialogHelper.alert(this, "Sai mật khẩu!"); 
+                else{
+                    DialogHelper.alert(this, "Sai mật khẩu!");
                 } 
             } 
             else{ 
@@ -211,6 +216,10 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         catch (Exception e) { 
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!"+e); 
         } 
+     }
+     void openMain() {
+         MainJFrame main = new MainJFrame();
+         main.setVisible(true);
      }
     /**
      * @param args the command line arguments

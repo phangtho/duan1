@@ -33,11 +33,11 @@ public class HocSinhDAO {
         model.getId());
     }
     public void delete(String id){
-        String sql="DELETE FROM HocSinh WHERE id=?";
+        String sql="DELETE FROM hocSinh WHERE id=?";
         JDBCHelper.executeUpdate(sql, id);
     }
     public HocSinh findByID(String id){
-        String sql = "SELECT * FROM HocSinh WHERE id=?";
+        String sql = "SELECT * FROM hocSinh WHERE id=?";
         List<HocSinh> list = select(sql, id);
         return list.size() > 0 ? list.get(0) : null;
     }

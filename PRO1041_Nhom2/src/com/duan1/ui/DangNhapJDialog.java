@@ -5,7 +5,10 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.HocSinhDAO;
 import com.duan1.helper.DialogHelper;
+import com.duan1.helper.ShareHelper;
+import com.duan1.model.HocSinh;
 
 /**
  *
@@ -21,7 +24,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+     HocSinhDAO dao = new HocSinhDAO();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,16 +172,46 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     private void btDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangKyActionPerformed
         // TODO add your handling code here:
         openDangKy();
+        this.dispose();
     }//GEN-LAST:event_btDangKyActionPerformed
-
+    
     private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
         // TODO add your handling code here:
+        login();
     }//GEN-LAST:event_btDangNhapActionPerformed
     void exit() {
         if (DialogHelper.confirm(this, "Bạn có muốn thoát khỏi ứng dụng không?")) {
             System.exit(0);
         }
     }
+    void openDangKy(){
+        DangKyJFrame dk = new DangKyJFrame();
+        dk.setVisible(true);
+    }
+    void login() {
+          String hsid = txUser.getText(); 
+        String matKhau = new String(txPass.getPassword()); 
+        try { 
+            HocSinh hocSinh = dao.findByID(hsid);
+            if(hocSinh != null){ 
+                String matKhau2 = hocSinh.getMatKhau().trim(); 
+                if(matKhau.equals(matKhau2)){ 
+                    ShareHelper.USER = hocSinh; 
+                    DialogHelper.alert(this, "Đăng nhập thành công!"); 
+                    this.dispose(); 
+                } 
+                else{
+                    DialogHelper.alert(this, "Sai mật khẩu!");
+                } 
+            } 
+            else{ 
+                DialogHelper.alert(this, "Sai tên đăng nhập!"); 
+            } 
+        }  
+        catch (Exception e) { 
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!"+e); 
+        } 
+     }
 
     /**
      * @param args the command line arguments
@@ -235,8 +268,5 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     private javax.swing.JPasswordField txPass;
     private javax.swing.JTextField txUser;
     // End of variables declaration//GEN-END:variables
-    void openDangKy(){
-        DangKyJFrame dk = new DangKyJFrame();
-        dk.setVisible(true);
-    }
+
 }

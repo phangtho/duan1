@@ -10,29 +10,12 @@ package com.duan1.model;
  * @author QUAN
  */
 public class HocSinh {
+
     String ten;
     String email;
     String id;
     String matKhau;
 
-    public HocSinh(String ten, String email, String id,String matKhau) {
-        this.ten = ten;
-        this.email = email;
-        this.id = id;
-        this.matKhau = matKhau;
-    }
-    public String getMatKhau() {
-        return matKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
-    }
-
-    public HocSinh() {
-        }
-
-    
     public String getTen() {
         return ten;
     }
@@ -57,6 +40,12 @@ public class HocSinh {
         this.id = id;
     }
 
+    public String getMatKhau() {
+        return matKhau;
+    }
 
-    
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
 }

@@ -29,7 +29,6 @@ public class MainJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         tab.setEnabledAt(1, true);
         setIconImage(ShareHelper.APP_ICON);
-        this.openLogin();
     }
 
     /**
@@ -109,6 +108,7 @@ public class MainJFrame extends javax.swing.JFrame {
         mniHuongDan = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jDesktopPane2.setEnabled(false);
         jDesktopPane2.setOpaque(false);
@@ -760,8 +760,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.openLogin();
     }
     public void openLogin(){
-        DangNhapJFrame dn = new DangNhapJFrame();
-        dn.setVisible(true);
+        new DangNhapJDialog(this, true).setVisible(true); 
     }
 
 /**
