@@ -40,13 +40,13 @@ public class DateHelper {
     public static Date now() {
         return new Date();
     }
-//    public static Date addDays(Date date, int days) {
-//        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-//        return date;
-//    }
-//    public static Date add(int days) {
-//        Date now = DateHelper.now();
-//        now.setTime(now.getTime() + days * 24 * 60 * 60 * 1000);
-//        return now;
-//    }
+    public static Date addDays(Date date, int days) {
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        return date;
+    }
+    public static Date add(int days) {
+        Date now = DateHelper.now();
+        now.setTime(now.getTime() + days * 24 * 60 * 60 * 1000);
+        return now;
+    }
 }

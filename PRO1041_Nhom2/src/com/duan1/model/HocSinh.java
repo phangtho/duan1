@@ -5,6 +5,13 @@
  */
 package com.duan1.model;
 
+import java.util.Date;
+
+
+
+
+
+
 /**
  *
  * @author QUAN
@@ -15,6 +22,12 @@ public class HocSinh {
     String email;
     String id;
     String matKhau;
+    boolean gioiTinh;
+    String ngaySinh;
+    String maGV;
+    String ghiChu;
+
+   
 
     public String getTen() {
         return ten;
@@ -32,6 +45,22 @@ public class HocSinh {
         this.email = email;
     }
 
+    public void setGioiTinh(boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public void setMaGV(String maGV) {
+        this.maGV = maGV;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
     public String getId() {
         return id;
     }
@@ -46,6 +75,22 @@ public class HocSinh {
 
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
+    }
+
+    public boolean getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public String getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public String getMaGV() {
+        return maGV;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
     }
 
 }
