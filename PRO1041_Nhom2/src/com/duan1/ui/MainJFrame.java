@@ -108,6 +108,7 @@ public class MainJFrame extends javax.swing.JFrame {
         mniTKBangDiem = new javax.swing.JMenuItem();
         mniTKDiemTongHop = new javax.swing.JMenuItem();
         mnuTroGiup = new javax.swing.JMenu();
+        mniGioiThieu = new javax.swing.JMenuItem();
         mniHuongDan = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -629,6 +630,15 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mnuTroGiup.setText("Trợ giúp");
 
+        mniGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Brick house.png"))); // NOI18N
+        mniGioiThieu.setText("Giới Thiệu Phần Mềm");
+        mniGioiThieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniGioiThieuActionPerformed(evt);
+            }
+        });
+        mnuTroGiup.add(mniGioiThieu);
+
         mniHuongDan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Globe.png"))); // NOI18N
         mniHuongDan.setText("Hướng dẫn phần mềm");
         mnuTroGiup.add(mniHuongDan);
@@ -743,6 +753,11 @@ public class MainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi mở exam");
         }
     }//GEN-LAST:event_btnLBTongHopActionPerformed
+
+    private void mniGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGioiThieuActionPerformed
+        // TODO add your handling code here:
+        openGioiThieu();
+    }//GEN-LAST:event_mniGioiThieuActionPerformed
     public void openMonThi(){
        ChonMonJFrame cm = new ChonMonJFrame();
        jDesktopPane2.add(cm);
@@ -753,6 +768,10 @@ public class MainJFrame extends javax.swing.JFrame {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn kết thúc?")) {
             System.exit(0);
         }
+    }
+    
+    public void openGioiThieu() {
+         new GioiThieuJDialog(this, true).setVisible(true); 
     }
 
     public void openKetQua() {
@@ -888,6 +907,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniDangNhap;
     private javax.swing.JMenuItem mniDangXuat;
     private javax.swing.JMenuItem mniDoiMatKhau;
+    private javax.swing.JMenuItem mniGioiThieu;
     private javax.swing.JMenuItem mniHuongDan;
     private javax.swing.JMenuItem mniQLiCauHoi;
     private javax.swing.JMenuItem mniQLiGiaoVien;

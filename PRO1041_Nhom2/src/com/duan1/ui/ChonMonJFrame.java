@@ -34,6 +34,10 @@ public class ChonMonJFrame extends javax.swing.JInternalFrame {
         btnLy = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         btnToan.setText("TOÁN");
         btnToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
