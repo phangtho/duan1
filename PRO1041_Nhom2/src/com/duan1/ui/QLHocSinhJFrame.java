@@ -492,7 +492,6 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                     hs.getGioiTinh() ? "Nam" : "Nữ",
                     hs.getNgaySinh(),
                     hs.getEmail(),
-                    hs.getMaGV(),
                 };
                 model.addRow(row);
             }
@@ -512,7 +511,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                 DialogHelper.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Thêm mới thất bại!");
-                e.printStackTrace();
+        
             
         }
     }
@@ -526,7 +525,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                 DialogHelper.alert(this, "Cập nhật thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Cập nhật thất bại!");
-                e.printStackTrace();
+    
             }
         
     }
@@ -586,7 +585,6 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         model.setNgaySinh(txNgaySinh.getText());
         model.setEmail(txEmail.getText());
         model.setGhiChu(txGhiChu.getText());
-        model.setMaGV(ShareHelper.USER.getMaGV());
         model.setMatKhau(txPass.getText());
         return model;
     }
