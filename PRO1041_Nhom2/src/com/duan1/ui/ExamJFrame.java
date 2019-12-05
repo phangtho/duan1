@@ -152,6 +152,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
     }
     public void nopBai(){
         JOptionPane.showMessageDialog(this,"Điểm của bạn là: "+diem+"/10");
+        timer.stop();
         String idhs = ShareHelper.USER.getId();
         String ngayLam = DateHelper.now().toString();
         String baiLam = lblMon.getText();
