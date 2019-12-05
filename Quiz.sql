@@ -9,7 +9,7 @@ drop table boDeTH
 go
 
 create table boDeTH(
-	maDe nchar(10) not null,
+	maDe varchar(255) not null,
 	maNguoiTao nchar(100) not null,
 	ngayTao date not null,
 	constraint PK_boDeTH Primary key (maDe),
@@ -23,7 +23,7 @@ drop table boDeMon
 go
 
 create table boDeMon(
-	maMon nchar(10) not null,
+	maMon varchar(255) not null,
 	maNguoiTao nchar(100) not null,
 	ngayTao date not null,
 	constraint PK_boDeMon Primary key (maMon),
@@ -37,20 +37,17 @@ drop table cauHoi
 go
 
 create table cauHoi(
-	id int identity(1,1) not null,
-	monThi nchar(10) not null,
-	deTH nchar(10) not null,
+	id int not null,
+	monThi varchar(255) not null,
+	deTH varchar(255) not null,
 	de nvarchar(max) not null,
-	dapAn nvarchar(200) not null,
-	daSai nvarchar(200) not null,
-	daSai1 nvarchar(200) not null,
-	daSai2 nvarchar(200) not null,
-	maNguoiTao nchar(100) not null,
-	ngayTao date not null,
+	dapAn nvarchar(max) not null,
+	daSai nvarchar(max) not null,
+	daSai1 nvarchar(max) not null,
+	daSai2 nvarchar(max) not null,
 	constraint PK_cauHoi Primary key (id),
 	constraint FK_cauHoi_boDeMon foreign key (monThi) references boDeMon(maMon),
-	constraint FK_cauHoi_boDeTH foreign key (deTH) references boDeTH(maDe),
-	constraint FK_cauHoi_giaoVien foreign key (maNguoiTao) references giaoVien(id)
+	constraint FK_cauHoi_boDeTH foreign key (deTH) references boDeTH(maDe)
 	on Update cascade
 	on Delete cascade
 )
@@ -92,7 +89,7 @@ create table ketQua(
 	id int identity(1,1) not null,
 	idHS nchar(100) not null,
 	diem float not null,
-	ngayLam date not null,
+	ngayLam nvarchar(100) not null,
 	baiLam nvarchar(100) not null,
 	constraint PK_ketQua Primary key (id),
 	constraint FK_ketQua_hocSinh foreign key (idHS) references hocSinh(id)	

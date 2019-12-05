@@ -16,8 +16,7 @@ public class KetQua {
     String ngayLam;
     String baiLam;
 
-    public KetQua(int id, String idHSinh, double diem, String ngayLam, String baiLam) {
-        this.id = id;
+    public KetQua(String idHSinh, double diem, String ngayLam, String baiLam) {
         this.idHSinh = idHSinh;
         this.diem = diem;
         this.ngayLam = ngayLam;

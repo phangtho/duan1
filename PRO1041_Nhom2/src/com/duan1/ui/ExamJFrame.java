@@ -6,7 +6,11 @@
 package com.duan1.ui;
 
 import com.duan1.DAO.CauHoiDAO;
+import com.duan1.DAO.KetQuaDAO;
+import com.duan1.helper.DateHelper;
+import com.duan1.helper.ShareHelper;
 import com.duan1.model.CauHoi;
+import com.duan1.model.KetQua;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -148,6 +152,12 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
     }
     public void nopBai(){
         JOptionPane.showMessageDialog(this,"Điểm của bạn là: "+diem+"/10");
+        String idhs = ShareHelper.USER.getId();
+        String ngayLam = DateHelper.now().toString();
+        String baiLam = lblMon.getText();
+        KetQua kq = new KetQua(idhs, diem, ngayLam, baiLam);
+        KetQuaDAO kqdao = new KetQuaDAO();
+        kqdao.insert(kq);
         diem=0;
         this.dispose();
     }
