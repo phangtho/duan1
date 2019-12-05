@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class HocSinhDAO {
     public void insert(HocSinh model){
-        String sql="insert into hocSinh(id,matKhau,ten,email,gioiTinh,ngaySinh,ghiChu,maGV) values (?,?,?,?,?,?,?,?)";
+        String sql="insert into hocSinh(id,matKhau,ten,email,gioiTinh,ngaySinh,ghiChu) values (?,?,?,?,?,?,?)";
         JDBCHelper.executeUpdate(sql,
         model.getId(),
         model.getMatKhau(),
@@ -26,12 +26,11 @@ public class HocSinhDAO {
         model.getEmail(),
         model.getGioiTinh(),
         model.getNgaySinh(),
-        model.getGhiChu(),
-        model.getMaGV()
+        model.getGhiChu()
         );
     }
     public void update(HocSinh model){
-        String sql="UPDATE hocSinh SET matKhau=?, ten=?, email=?, gioiTinh=?,ngaySinh=?,ghiChu=?,maGV=? WHERE id=?";
+        String sql="UPDATE hocSinh SET matKhau=?, ten=?, email=?, gioiTinh=?,ngaySinh=?,ghiChu=? WHERE id=?";
         JDBCHelper.executeUpdate(sql,
         model.getMatKhau(),
         model.getTen(),
@@ -39,7 +38,6 @@ public class HocSinhDAO {
         model.getGioiTinh(),
         model.getNgaySinh(),
         model.getGhiChu(),
-        model.getMaGV(),
         model.getId());
     }
     public void delete(String id){
@@ -88,7 +86,6 @@ public class HocSinhDAO {
         model.setGioiTinh(rs.getBoolean("gioiTinh"));
         model.setGhiChu(rs.getString("ghiChu"));
         model.setNgaySinh(DateHelper.toString(rs.getDate("ngaySinh")));
-        model.setMaGV(rs.getString("maGV"));
     return model;
     }
 }

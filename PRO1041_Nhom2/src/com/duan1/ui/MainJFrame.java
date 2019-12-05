@@ -7,12 +7,6 @@ package com.duan1.ui;
 
 import com.duan1.helper.DialogHelper;
 import com.duan1.helper.ShareHelper;
-import com.duan1.ui.CauHoiJFrame;
-import com.duan1.ui.ExamJFrame;
-import com.duan1.ui.ThongKeJFrame;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 

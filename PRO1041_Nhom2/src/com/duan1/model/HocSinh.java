@@ -24,7 +24,6 @@ public class HocSinh {
     String matKhau;
     boolean gioiTinh;
     String ngaySinh;
-    String maGV;
     String ghiChu;
 
    
@@ -53,10 +52,6 @@ public class HocSinh {
         this.ngaySinh = ngaySinh;
     }
 
-    public void setMaGV(String maGV) {
-        this.maGV = maGV;
-    }
-
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
@@ -83,10 +78,6 @@ public class HocSinh {
 
     public String getNgaySinh() {
         return ngaySinh;
-    }
-
-    public String getMaGV() {
-        return maGV;
     }
 
     public String getGhiChu() {
