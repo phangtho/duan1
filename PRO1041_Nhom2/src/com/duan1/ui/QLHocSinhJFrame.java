@@ -5,6 +5,16 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.HocSinhDAO;
+import com.duan1.helper.DateHelper;
+import com.duan1.helper.DialogHelper;
+import com.duan1.helper.ShareHelper;
+import com.duan1.model.HocSinh;
+import java.awt.HeadlessException;
+import java.sql.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -51,6 +61,8 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         btNext = new javax.swing.JButton();
         btPrev = new javax.swing.JButton();
         btFirst = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txPass = new javax.swing.JTextField();
         pDanhSach = new javax.swing.JPanel();
         pTimKiem = new javax.swing.JPanel();
         txTim = new javax.swing.JTextField();
@@ -63,6 +75,23 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(704, 763));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
@@ -76,6 +105,8 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Giới tính");
 
+        cbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nam", "Nữ" }));
+
         jLabel5.setText("Ngày sinh");
 
         jLabel6.setText("Địa chỉ email");
@@ -87,29 +118,76 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txGhiChu);
 
         btAdd.setText("Thêm");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
 
         btUpdate.setText("Sửa");
+        btUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUpdateActionPerformed(evt);
+            }
+        });
 
         btDelete.setText("Xóa");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
 
         btNew.setText("Mới");
+        btNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNewActionPerformed(evt);
+            }
+        });
 
         btLast.setText(">|");
+        btLast.setEnabled(false);
+        btLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLastActionPerformed(evt);
+            }
+        });
 
         btNext.setText(">>");
+        btNext.setEnabled(false);
+        btNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNextActionPerformed(evt);
+            }
+        });
 
         btPrev.setText("<<");
+        btPrev.setEnabled(false);
+        btPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrevActionPerformed(evt);
+            }
+        });
 
         btFirst.setText("|<");
+        btFirst.setEnabled(false);
+        btFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFirstActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Mật khẩu");
 
         javax.swing.GroupLayout pThongTinLayout = new javax.swing.GroupLayout(pThongTin);
         pThongTin.setLayout(pThongTinLayout);
         pThongTinLayout.setHorizontalGroup(
             pThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txMa)
+            .addComponent(txPass)
             .addGroup(pThongTinLayout.createSequentialGroup()
                 .addComponent(jLabel3)
-                .addContainerGap(562, Short.MAX_VALUE))
-            .addComponent(txMa)
+                .addContainerGap(593, Short.MAX_VALUE))
             .addComponent(txTen)
             .addGroup(pThongTinLayout.createSequentialGroup()
                 .addGroup(pThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,12 +199,6 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                     .addComponent(txNgaySinh)))
             .addComponent(txEmail)
             .addComponent(jScrollPane1)
-            .addGroup(pThongTinLayout.createSequentialGroup()
-                .addGroup(pThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pThongTinLayout.createSequentialGroup()
                 .addComponent(btAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,6 +215,13 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                 .addComponent(btNext)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btLast))
+            .addGroup(pThongTinLayout.createSequentialGroup()
+                .addGroup(pThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pThongTinLayout.setVerticalGroup(
             pThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,6 +230,10 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,7 +264,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                     .addComponent(btNext)
                     .addComponent(btPrev)
                     .addComponent(btFirst))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         tabs.addTab("THÔNG TIN", pThongTin);
@@ -189,6 +272,11 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         pTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TÌM KIẾM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         btTim.setText("Tìm");
+        btTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pTimKiemLayout = new javax.swing.GroupLayout(pTimKiem);
         pTimKiem.setLayout(pTimKiemLayout);
@@ -225,6 +313,11 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDanhSachMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbDanhSach);
@@ -273,6 +366,73 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
+        // TODO add your handling code here:
+         this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btFirstActionPerformed
+
+    private void btPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrevActionPerformed
+        // TODO add your handling code here:
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btPrevActionPerformed
+
+    private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
+        // TODO add your handling code here:
+          this.index++;
+        this.edit();
+    }//GEN-LAST:event_btNextActionPerformed
+
+    private void btLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastActionPerformed
+        // TODO add your handling code here:
+        this.index = tbDanhSach.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btLastActionPerformed
+
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btAddActionPerformed
+
+    private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btUpdateActionPerformed
+
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btDeleteActionPerformed
+
+    private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btNewActionPerformed
+
+    private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
+        // TODO add your handling code here:
+        this.load();
+        clear();
+    }//GEN-LAST:event_btTimActionPerformed
+
+    private void tbDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.index = tbDanhSach.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+                tabs.setSelectedIndex(0);
+            }
+        }
+    }//GEN-LAST:event_tbDanhSachMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
@@ -292,6 +452,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pDanhSach;
@@ -303,7 +464,132 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txGhiChu;
     private javax.swing.JTextField txMa;
     private javax.swing.JTextField txNgaySinh;
+    private javax.swing.JTextField txPass;
     private javax.swing.JTextField txTen;
     private javax.swing.JTextField txTim;
     // End of variables declaration//GEN-END:variables
+
+    int index = 0;
+    HocSinhDAO dao = new HocSinhDAO();
+    
+    void load(){
+        DefaultTableModel model = (DefaultTableModel) tbDanhSach.getModel();
+        model.setRowCount(0);
+        try {
+            String keyword = txTim.getText();
+            List<HocSinh> list = dao.selectByKeyword(keyword);
+            for (HocSinh hs : list) {
+                Object[] row = {
+                    hs.getId(),
+                    hs.getTen(),
+                    hs.getGioiTinh() ? "Nam" : "Nữ",
+                    hs.getNgaySinh(),
+                    hs.getEmail(),
+                    hs.getMaGV(),
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
+    }
+    
+    void insert() {
+       HocSinh model = getModel();
+
+          try   {
+                dao.insert(model);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+                e.printStackTrace();
+            
+        }
+    }
+
+    void update() {
+        HocSinh model = getModel();
+            try {
+                dao.update(model);
+                this.load();
+                
+                DialogHelper.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+                e.printStackTrace();
+            }
+        
+    }
+
+    void delete() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa người học này?")) {
+            String maHS = txMa.getText();
+            try {
+                dao.delete(maHS);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                DialogHelper.alert(this, "Xóa thất bại!");         
+        }
+        }
+    }
+    
+    void clear() {
+        HocSinh model = new HocSinh();
+        model.setMaGV(ShareHelper.USER.getMaGV());
+        this.setModel(model);
+    }
+
+    void edit() {
+        try {
+            String maHS = (String) tbDanhSach.getValueAt(this.index, 0);
+          HocSinh model = dao.findByID(maHS);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    void setModel(HocSinh model) {
+        txMa.setText(model.getId());
+        txTen.setText(model.getTen());
+        cbGioiTinh.setSelectedIndex(model.getGioiTinh() ? 0 : 1);
+        txNgaySinh.setText(model.getNgaySinh());
+        txEmail.setText(model.getEmail());
+        txGhiChu.setText(model.getGhiChu());
+        txPass.setText(model.getMatKhau());
+    }
+
+    HocSinh getModel() {
+        HocSinh model = new HocSinh();
+        model.setId(txMa.getText());
+        model.setTen(txTen.getText());
+        model.setGioiTinh(cbGioiTinh.getSelectedIndex() == 0);
+        model.setNgaySinh(txNgaySinh.getText());
+        model.setEmail(txEmail.getText());
+        model.setGhiChu(txGhiChu.getText());
+        model.setMaGV(ShareHelper.USER.getMaGV());
+        model.setMatKhau(txPass.getText());
+        return model;
+    }
+
+    void setStatus(boolean insertable) {
+        txMa.setEditable(insertable);
+        btAdd.setEnabled(insertable);
+        btUpdate.setEnabled(!insertable);
+        btDelete.setEnabled(!insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tbDanhSach.getRowCount() - 1;
+        btFirst.setEnabled(!insertable && first);
+        btPrev.setEnabled(!insertable && first);
+        btLast.setEnabled(!insertable && last);
+        btNext.setEnabled(!insertable && last);
+    }
 }

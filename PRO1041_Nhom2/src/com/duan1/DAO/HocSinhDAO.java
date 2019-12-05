@@ -5,6 +5,7 @@
  */
 package com.duan1.DAO;
 
+import com.duan1.helper.DateHelper;
 import com.duan1.helper.JDBCHelper;
 import java.util.List;
 import com.duan1.model.HocSinh;
@@ -17,19 +18,28 @@ import java.util.ArrayList;
  */
 public class HocSinhDAO {
     public void insert(HocSinh model){
-        String sql="insert into hocSinh(id,matKhau,ten,email) values (?,?,?,?)";
+        String sql="insert into hocSinh(id,matKhau,ten,email,gioiTinh,ngaySinh,ghiChu,maGV) values (?,?,?,?,?,?,?,?)";
         JDBCHelper.executeUpdate(sql,
         model.getId(),
         model.getMatKhau(),
         model.getTen(),
-        model.getEmail());
+        model.getEmail(),
+        model.getGioiTinh(),
+        model.getNgaySinh(),
+        model.getGhiChu(),
+        model.getMaGV()
+        );
     }
     public void update(HocSinh model){
-        String sql="UPDATE hocSinh SET matKhau=?, ten=?, email=? WHERE id=?";
+        String sql="UPDATE hocSinh SET matKhau=?, ten=?, email=?, gioiTinh=?,ngaySinh=?,ghiChu=?,maGV=? WHERE id=?";
         JDBCHelper.executeUpdate(sql,
         model.getMatKhau(),
         model.getTen(),
         model.getEmail(),
+        model.getGioiTinh(),
+        model.getNgaySinh(),
+        model.getGhiChu(),
+        model.getMaGV(),
         model.getId());
     }
     public void delete(String id){
@@ -65,12 +75,20 @@ public class HocSinhDAO {
         }
     return list;
     }
+    public List<HocSinh> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM hocSinh WHERE ten LIKE ?";
+        return select(sql, "%" + keyword + "%");
+    }
     private HocSinh readFromResultSet(ResultSet rs) throws SQLException{
         HocSinh model=new HocSinh();
         model.setId(rs.getString("id"));
         model.setMatKhau(rs.getString("matKhau"));
         model.setTen(rs.getString("ten"));
         model.setEmail(rs.getString("email"));
+        model.setGioiTinh(rs.getBoolean("gioiTinh"));
+        model.setGhiChu(rs.getString("ghiChu"));
+        model.setNgaySinh(DateHelper.toString(rs.getDate("ngaySinh")));
+        model.setMaGV(rs.getString("maGV"));
     return model;
     }
 }

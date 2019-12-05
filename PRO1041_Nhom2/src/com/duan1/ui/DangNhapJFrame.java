@@ -146,7 +146,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
                     .addComponent(btDangNhap)
                     .addComponent(btKetThuc)
                     .addComponent(btDangKy))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -202,6 +202,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
                 if(matKhau.equals(matKhau2)){ 
                     ShareHelper.USER = hocSinh; 
                     DialogHelper.alert(this, "Đăng nhập thành công!"); 
+                    this.dispose();
                     openMain();
                 } 
                 else{
