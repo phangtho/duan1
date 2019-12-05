@@ -14,6 +14,7 @@ import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -119,6 +120,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnLBTongHop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Database.png"))); // NOI18N
         btnLBTongHop.setText("<html><br/><br/><br/> LÀM BÀI TỔNG HỢP</html>");
         btnLBTongHop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLBTongHop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLBTongHopActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -646,14 +652,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnLBTheoMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBTheoMonActionPerformed
         // TODO add your handling code here:
-
-        try {
-            ExamJFrame form = new ExamJFrame();
-            jDesktopPane2.add(form);
-            form.setVisible(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        openMonThi();
     }//GEN-LAST:event_btnLBTheoMonActionPerformed
 
     private void btnDiemTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiemTongHopActionPerformed
@@ -732,6 +731,24 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         logoff();
     }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void btnLBTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBTongHopActionPerformed
+        // TODO add your handling code here:
+        ExamJFrame ef;
+        try {
+            ef = new ExamJFrame("TH");
+            jDesktopPane2.add(ef);
+            ef.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi mở exam");
+        }
+    }//GEN-LAST:event_btnLBTongHopActionPerformed
+    public void openMonThi(){
+       ChonMonJFrame cm = new ChonMonJFrame();
+       jDesktopPane2.add(cm);
+       cm.setVisible(true); 
+    }
+    
     public void exit() {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn kết thúc?")) {
             System.exit(0);

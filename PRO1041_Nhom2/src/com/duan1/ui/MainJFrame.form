@@ -305,6 +305,9 @@
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt; L&#xc0;M B&#xc0;I T&#x1ed4;NG H&#x1ee2;P&lt;/html&gt;"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLBTongHopActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
