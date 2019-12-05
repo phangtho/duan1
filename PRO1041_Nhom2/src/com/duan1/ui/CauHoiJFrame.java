@@ -8,8 +8,11 @@ package com.duan1.ui;
 import com.duan1.DAO.CauHoiDAO;
 import com.duan1.helper.DateHelper;
 import com.duan1.helper.DialogHelper;
+import com.duan1.helper.JDBCHelper;
 import com.duan1.model.CauHoi;
 import java.awt.HeadlessException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -97,6 +100,12 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         jLabel1.setText("QUẢN LÝ CÂU HỎI");
 
         jLabel2.setText("Mã câu hỏi");
+
+        txMaCH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txMaCHActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Môn thi");
 
@@ -376,6 +385,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         this.load();
         fillToComboBoxDe();
         fillToComboBoxMon();
+        fillToComboBoxTim();
         this.setStatus(true);
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -397,6 +407,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         // TODO add your handling code here
         clear();
+        setStatus(true);
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
@@ -426,7 +437,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
     private void cbTimMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimMonActionPerformed
         // TODO add your handling code here:
-      
+      fillToTableMon();
     }//GEN-LAST:event_cbTimMonActionPerformed
 
     private void tbMonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMonMouseClicked
@@ -439,6 +450,11 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_tbMonMouseClicked
+
+    private void txMaCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txMaCHActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txMaCHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -497,6 +513,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
         }
+        
     }
     
        void insert() {
@@ -506,6 +523,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                 dao.insert(model);
                 this.load();
                 this.clear();
+                fillToTableMon();
                 DialogHelper.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Thêm mới thất bại!");
@@ -518,7 +536,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
             try {
                 dao.update(model);
                 this.load();
-                
+                fillToTableMon();
                 DialogHelper.alert(this, "Cập nhật thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Cập nhật thất bại!");
@@ -534,6 +552,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                 dao.delete(maCH);
                 this.load();
                 this.clear();
+                fillToTableMon();
                 DialogHelper.alert(this, "Xóa thành công!");
             } catch (HeadlessException e) {
                 DialogHelper.alert(this, "Xóa thất bại!");         
@@ -554,14 +573,14 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
     void edit() {
         try {
-           char maCH = (char) tbMon.getValueAt(this.index, 0);
+           Integer maCH = (Integer) tbMon.getValueAt(this.index, 0);
             CauHoi model = dao.findById(maCH);
             if (model != null) {
                 this.setModel(model);
                 this.setStatus(false);
             }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");    e.printStackTrace();
            
         }
     }
@@ -600,6 +619,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         btAdd.setEnabled(insertable);
         btUpdate.setEnabled(!insertable);
         btDelete.setEnabled(!insertable);
+        txMaCH.setEditable(insertable);
         boolean first = this.index > 0;
         boolean last = this.index < tbMon.getRowCount() - 1;
         btFirst.setEnabled(!insertable && first);
@@ -611,14 +631,16 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     void fillToComboBoxDe(){
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbDe.getModel();
            model.removeAllElements();
-        try {
-            List<CauHoi> list = dao.select();
-            for (CauHoi ch : list) {
-                String de = ch.getDeTH();
+    try {
+            String sql = "Select * from boDeTH";
+             ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {;
+                String de = rs.getString("maDe");
                 model.addElement(de);
             }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Lỗi truy vấn combo box đề tổng hợp!");
         }
         cbDe.setSelectedIndex(0);
     }
@@ -627,21 +649,59 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     
     void fillToComboBoxMon(){
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbMon.getModel();
-        DefaultComboBoxModel tim = (DefaultComboBoxModel) cbTimMon.getModel();
+       
            model.removeAllElements();
-           tim.removeAllElements();
+ 
         try {
-            List<CauHoi> list = dao.select();
-            for (CauHoi ch : list) {
-                String mon = ch.getMon();
+            String sql = "Select * from boDeMon";
+             ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {;
+                String mon = rs.getString("maMon");
                 model.addElement(mon);
-                tim.addElement(mon);
             }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Lỗi truy vấn combo box môn học!");
         }
         cbMon.setSelectedIndex(0);
+       
+    }
+        void fillToComboBoxTim(){
+             DefaultComboBoxModel model = (DefaultComboBoxModel) cbTimMon.getModel();
+             model.removeAllElements();
+ 
+        try {
+            String sql = "Select * from boDeMon";
+             ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {;
+                String mon = rs.getString("maMon");
+                model.addElement(mon);
+            }
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Loi truy vấn combo box tìm kiếm!");
+        }
         cbTimMon.setSelectedIndex(0);
+        }
+    
+    void fillToTableMon(){
+         DefaultTableModel model = (DefaultTableModel) tbMon.getModel();
+        model.setRowCount(0);
+        
+        try {
+            String sql = "Select * from cauHoi where monThi=?";
+            ResultSet rs = JDBCHelper.executeQuery(sql, cbTimMon.getSelectedItem().toString() );
+            while (rs.next()) {;
+                Object[] row = {
+                    rs.getInt("id"), rs.getString("deTH"),
+                    rs.getString("de"),rs.getString("dapAn")
+                };
+                model.addRow(row);
+            }
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Loi truy vấn môn thi!");
+        }
     }
 }
     

@@ -43,7 +43,7 @@ public class CauHoiDAO {
         model.getId());
     }
     public void delete(String id){
-        String sql="DELETE FROM CauHoi WHERE id=?";
+        String sql="DELETE FROM cauHoi WHERE id=?";
         JDBCHelper.executeUpdate(sql, id);
     }
     public List<CauHoi> select(){
@@ -71,7 +71,7 @@ public class CauHoiDAO {
         Stream.of(list1,list2,list3).forEach(list::addAll);
         return list;
     }
-    public CauHoi findById(char id){
+    public CauHoi findById(int id){
         String sql = "SELECT * FROM cauHoi WHERE id=?";
         List<CauHoi> list = select(sql, id);
         return list.size() > 0 ? list.get(0) : null;
