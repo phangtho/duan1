@@ -76,9 +76,7 @@ create table hocSinh(
 	ngaySinh date not null,
 	email nvarchar(100) not null,
 	ghiChu nvarchar(max) ,
-	maGV nchar(100) not null,
-	constraint PK_hocSinh Primary key (id),
-	constraint FK_hocSinh_giaoVien foreign key(maGV) references giaoVien(id)
+	constraint PK_hocSinh Primary key (id)
 )
 
 if OBJECT_ID('ketQua') is not null
