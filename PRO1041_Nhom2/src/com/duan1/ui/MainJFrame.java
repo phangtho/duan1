@@ -13,6 +13,7 @@ import com.duan1.ui.ThongKeJFrame;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,6 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
         setTitle("Hệ thống quản lý thi");
         setLocationRelativeTo(null);
         tab.setEnabledAt(1, true);
+        ImageIcon icon = new ImageIcon(ShareHelper.APP_ICON);
         setIconImage(ShareHelper.APP_ICON);
     }
 
@@ -735,38 +737,44 @@ public class MainJFrame extends javax.swing.JFrame {
             System.exit(0);
         }
     }
+
     public void openKetQua() {
         KetQuaJFrame kq = new KetQuaJFrame();
         jDesktopPane2.add(kq);
         kq.setVisible(true);
     }
+
     public void openQLCauHoi() {
         CauHoiJFrame ch = new CauHoiJFrame();
         jDesktopPane2.add(ch);
         ch.setVisible(true);
     }
-    public void openThongKe(int index){
+
+    public void openThongKe(int index) {
         ThongKeJFrame tk = new ThongKeJFrame(index);
         jDesktopPane2.add(tk);
         tk.setVisible(true);
     }
+
     public void openQLHocSinh() {
         QLHocSinhJFrame qlhs = new QLHocSinhJFrame();
         jDesktopPane2.add(qlhs);
         qlhs.setVisible(true);
     }
-    public void logoff(){
+
+    public void logoff() {
         ShareHelper.logoff();
         this.openLogin();
     }
-    public void openLogin(){
-       this.dispose();
+
+    public void openLogin() {
+        this.dispose();
     }
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -777,28 +785,24 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainJFrame.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

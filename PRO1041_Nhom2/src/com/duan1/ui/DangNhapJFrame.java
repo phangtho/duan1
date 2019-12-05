@@ -64,6 +64,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         jLabel3.setText("ĐĂNG NHẬP");
 
         txUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txUser.setText("quanld");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Password");
@@ -93,6 +94,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         });
 
         txPass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txPass.setText("abc");
         txPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txPassActionPerformed(evt);

@@ -5,18 +5,140 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.GiaoVienDAO;
+import com.duan1.helper.DialogHelper;
+import com.duan1.helper.ShareHelper;
+import com.duan1.model.GiaoVien;
+import com.duan1.model.HocSinh;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
  */
 public class GiaoVienJFrame extends javax.swing.JInternalFrame {
-
+    GiaoVienDAO dao = new GiaoVienDAO();
+    int index;
     /**
      * Creates new form GiaoVien
      */
     public GiaoVienJFrame() {
         initComponents();
     }
+    public void load() {
+        DefaultTableModel model = (DefaultTableModel)tbDanhSach.getModel();
+        model.setRowCount(0);
+        try {
+            List<GiaoVien> list = dao.select();
+            for (GiaoVien gv : list ) {
+                Object[] row = {
+                    gv.getId(),
+                    gv.getTen(),
+                    gv.getPass(),
+                    gv.getEmail()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+    void insert() {
+        GiaoVien model = getModel();
+
+        String confirm = new String(txXacNhan.getPassword());
+        if (confirm.equals(model.getPass())) {
+            try {
+                dao.insert(model);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+            }
+        } else {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+
+    }
+    void update() {
+        GiaoVien model = getModel();
+
+        String confirm = new String(txXacNhan.getPassword());
+        if (!confirm.equals(model.getPass())) {
+            DialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
+        } else {
+            try {
+                dao.update(model);
+                this.load();
+                DialogHelper.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+            }
+        }
+    }
+
+    void delete() {
+      
+            if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa giáo viên này?")) {
+                String magv = txMa.getText();
+                try {
+                    dao.delete(magv);
+                    this.load();
+                    this.clear();
+                    DialogHelper.alert(this, "Xóa thành công!");
+                } catch (Exception e) {
+                    DialogHelper.alert(this, "Không được xóa bản thân!");
+                }
+            }
+    }
+    void clear() {
+        this.setModel(new GiaoVien());
+    }
+    void setModel(GiaoVien model) {
+        txMa.setText(model.getId().trim());
+        txTen.setText(model.getTen());
+        txPass.setText(model.getPass());
+        txXacNhan.setText(model.getPass());
+        txEmail.setText(model.getEmail());
+    }
+
+    GiaoVien getModel() {
+        GiaoVien model = new GiaoVien() ;
+            model.setId(txMa.getText().trim());
+            model.setTen(txTen.getText());
+            model.setPass(new String(txPass.getPassword()));
+            model.setEmail(txEmail.getText());
+        
+        return model;
+    }
+     void edit() {
+        try {
+            String gvid = (String) tbDanhSach.getValueAt(this.index, 0);
+            GiaoVien model = dao.findByID(gvid);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+     void setStatus(boolean insertable) {
+        
+        btAdd.setEnabled(insertable);
+        btUpdate.setEnabled(!insertable);
+        btDelete.setEnabled(!insertable);
+
+        boolean first = this.index > 0;
+        boolean last = this.index < tbDanhSach.getRowCount() - 1;
+        btFirst.setEnabled(!insertable && first);
+        btPrev.setEnabled(!insertable && first);
+        btNext.setEnabled(!insertable && last);
+        btLast.setEnabled(!insertable && last);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +178,23 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 204));
@@ -72,20 +211,60 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
         jLabel6.setText("Địa chỉ email");
 
         btAdd.setText("Thêm");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
 
         btUpdate.setText("Sửa");
+        btUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUpdateActionPerformed(evt);
+            }
+        });
 
         btDelete.setText("Xóa");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
 
         btNew.setText("Mới");
+        btNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNewActionPerformed(evt);
+            }
+        });
 
         btLast.setText(">|");
+        btLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLastActionPerformed(evt);
+            }
+        });
 
         btNext.setText(">>");
+        btNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNextActionPerformed(evt);
+            }
+        });
 
         btPrev.setText("<<");
+        btPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrevActionPerformed(evt);
+            }
+        });
 
         btFirst.setText("|<");
+        btFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFirstActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pCapNhatLayout = new javax.swing.GroupLayout(pCapNhat);
         pCapNhat.setLayout(pCapNhatLayout);
@@ -164,7 +343,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "MÃ GV", "HỌ VÀ TÊN", "EMAIL", "NGÀY CN"
+                "MÃ GV", "HỌ VÀ TÊN", "Mật Khẩu", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -173,6 +352,11 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDanhSachMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbDanhSach);
@@ -220,6 +404,67 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachMouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) {
+            this.index = tbDanhSach.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+                tabs.setSelectedIndex(0);
+            }
+        }
+    }//GEN-LAST:event_tbDanhSachMouseClicked
+
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btAddActionPerformed
+
+    private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btUpdateActionPerformed
+
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btDeleteActionPerformed
+
+    private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btNewActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
+        // TODO add your handling code here:
+         this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btFirstActionPerformed
+
+    private void btPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrevActionPerformed
+        // TODO add your handling code here:
+         this.index--;
+        this.edit();
+    }//GEN-LAST:event_btPrevActionPerformed
+
+    private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
+        // TODO add your handling code here:
+         this.index++;
+        this.edit();
+    }//GEN-LAST:event_btNextActionPerformed
+
+    private void btLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastActionPerformed
+        // TODO add your handling code here:
+        this.index = tbDanhSach.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btLastActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

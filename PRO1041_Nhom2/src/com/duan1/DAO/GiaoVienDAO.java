@@ -41,6 +41,11 @@ public class GiaoVienDAO {
         String sql="SELECT * FROM giaoVien";
         return select(sql);
     }
+    public GiaoVien findByID(String id){
+        String sql = "SELECT * FROM GiaoVien WHERE id=?";
+        List<GiaoVien> list = select(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
+    }
     private List<GiaoVien> select(String sql, Object...args){
         List<GiaoVien> list = new ArrayList<>();
         try {
