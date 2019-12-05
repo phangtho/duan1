@@ -304,7 +304,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã HS", "Họ tên", "Giới tính", "Ngày sinh", "Email", "Mã GV"
+                "Mã HS", "Họ tên", "Giới tính", "Ngày sinh", "Email", "Người tạo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -321,6 +321,13 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(tbDanhSach);
+        if (tbDanhSach.getColumnModel().getColumnCount() > 0) {
+            tbDanhSach.getColumnModel().getColumn(0).setResizable(false);
+            tbDanhSach.getColumnModel().getColumn(1).setResizable(false);
+            tbDanhSach.getColumnModel().getColumn(2).setResizable(false);
+            tbDanhSach.getColumnModel().getColumn(3).setResizable(false);
+            tbDanhSach.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         javax.swing.GroupLayout pDanhSachLayout = new javax.swing.GroupLayout(pDanhSach);
         pDanhSach.setLayout(pDanhSachLayout);
@@ -539,9 +546,13 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
     }
     
     void clear() {
-        HocSinh model = new HocSinh();
-        model.setMaGV(ShareHelper.USER.getMaGV());
-        this.setModel(model);
+        txMa.setText("");
+        txTen.setText("");
+        cbGioiTinh.setSelectedIndex(0);
+        txNgaySinh.setText("");
+        txEmail.setText("");
+        txGhiChu.setText("");
+        txPass.setText("");
     }
 
     void edit() {

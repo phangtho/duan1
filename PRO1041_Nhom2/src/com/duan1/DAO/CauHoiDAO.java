@@ -5,6 +5,7 @@
  */
 package com.duan1.DAO;
 
+import com.duan1.helper.DateHelper;
 import com.duan1.helper.JDBCHelper;
 import com.duan1.model.CauHoi;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class CauHoiDAO {
     public void insert(CauHoi model){
-        String sql="insert into cauHoi(id,monThi,deTH,de,dapAn,daSai,daSai1,daSai2) values (?,?,?,?,?,?,?,?)";
+        String sql="insert into cauHoi(id,monThi,deTH,de,dapAn,daSai,daSai1,daSai2,maNguoiTao) values (?,?,?,?,?,?,?,?,?)";
         JDBCHelper.executeUpdate(sql,
         model.getId(),
         model.getMon(),
@@ -27,10 +28,11 @@ public class CauHoiDAO {
         model.getDapAn(),
         model.getDapAnS1(),
         model.getDapAnS2(),
-        model.getDapAnS3());
+        model.getDapAnS3(),
+        model.getMaGV());
     }
     public void update(CauHoi model){
-        String sql="UPDATE cauHoi SET de=?, monThi=?, deTH=?, dapAn=?, daSai=?, daSai1=?, daSai2=? WHERE id=?";
+        String sql="UPDATE cauHoi SET de=?, monThi=?, deTH=?, dapAn=?, daSai=?, daSai1=?, daSai2=?,maNguoiTao=? WHERE id=?";
         JDBCHelper.executeUpdate(sql,
         model.getDeBai(),
         model.getMon(),
@@ -39,6 +41,7 @@ public class CauHoiDAO {
         model.getDapAnS1(),
         model.getDapAnS2(),
         model.getDapAnS3(),
+        model.getMaGV(),
         model.getId());
     }
     public void delete(String id){
@@ -69,6 +72,13 @@ public class CauHoiDAO {
         }
     return list;
     }
+    
+    public CauHoi findByID(int maCH) {
+        String sql = "SELECT * FROM cauHoi WHERE id=?";
+        List<CauHoi> list = select(sql, maCH);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
     private CauHoi readFromResultSet(ResultSet rs) throws SQLException{
         CauHoi model=new CauHoi();
         model.setId(rs.getInt("id"));
@@ -79,6 +89,8 @@ public class CauHoiDAO {
         model.setDapAnS1(rs.getString("daSai"));
         model.setDapAnS2(rs.getString("daSai1"));
         model.setDapAnS3(rs.getString("daSai2"));
+        model.setMaGV(rs.getString("maNguoiTao"));
+        model.setNgayTao(DateHelper.toString(rs.getDate("ngayTao")));
     return model;
     }
 }

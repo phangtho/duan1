@@ -5,6 +5,12 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.CauHoiDAO;
+import com.duan1.helper.DialogHelper;
+import com.duan1.model.CauHoi;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -65,6 +71,23 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 204));
@@ -94,18 +117,24 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         btAdd.setText("Thêm");
 
         btUpdate.setText("Sửa");
+        btUpdate.setEnabled(false);
 
         btDelete.setText("Xóa");
+        btDelete.setEnabled(false);
 
         btNew.setText("Mới");
 
         btLast.setText(">|");
+        btLast.setEnabled(false);
 
         btNext.setText(">>");
+        btNext.setEnabled(false);
 
         btPrev.setText("<<");
+        btPrev.setEnabled(false);
 
         btFirst.setText("|<");
+        btFirst.setEnabled(false);
 
         javax.swing.GroupLayout pCapNhatLayout = new javax.swing.GroupLayout(pCapNhat);
         pCapNhat.setLayout(pCapNhatLayout);
@@ -214,11 +243,11 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "MÃ CH", "CÂU HỎI", "ĐÁP ÁN", "XẾP LOẠI", "NGƯỜI TẠO", "NGÀY TẠO"
+                "MÃ CH", "CÂU HỎI", "ĐÁP ÁN", "NGƯỜI TẠO", "NGÀY TẠO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -233,11 +262,9 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
             tbMon.getColumnModel().getColumn(1).setPreferredWidth(100);
             tbMon.getColumnModel().getColumn(2).setResizable(false);
             tbMon.getColumnModel().getColumn(3).setResizable(false);
-            tbMon.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tbMon.getColumnModel().getColumn(3).setPreferredWidth(45);
             tbMon.getColumnModel().getColumn(4).setResizable(false);
-            tbMon.getColumnModel().getColumn(4).setPreferredWidth(45);
-            tbMon.getColumnModel().getColumn(5).setResizable(false);
-            tbMon.getColumnModel().getColumn(5).setPreferredWidth(60);
+            tbMon.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
         javax.swing.GroupLayout pMonLayout = new javax.swing.GroupLayout(pMon);
@@ -293,6 +320,12 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_formInternalFrameOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
@@ -329,4 +362,91 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txDapAnSai3;
     private javax.swing.JTextField txMaCH;
     // End of variables declaration//GEN-END:variables
+    
+    int index = 0;
+    CauHoiDAO dao = new CauHoiDAO();
+    
+    void load() {
+        DefaultTableModel model = (DefaultTableModel) tbMon.getModel();
+        model.setRowCount(0);
+        try {
+            List<CauHoi> list = dao.select();
+            for (CauHoi ch : list) {
+                Object[] row = {
+                    ch.getId(),
+                    ch.getDeBai(),
+                    ch.getDapAn(),
+                    ch.getMaGV(),
+                    ch.getNgayTao()                  
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    void clear() {
+        txCauHoi.setText("");
+        txMaCH.setText("");
+        cbMon.setSelectedIndex(0);
+        cbDe.setSelectedIndex(0);
+        txDapAn.setText("");
+        txDapAnSai1.setText("");
+        txDapAnSai2.setText("");
+        txDapAnSai3.setText("");
+    }
+
+    void edit() {
+        try {
+            int maCH = (int) tbMon.getValueAt(this.index, 0);
+            CauHoi model = dao.findByID(maCH);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    void setModel(CauHoi model) {
+        cbDe.setToolTipText(String.valueOf(model.getDeTH()));
+        cbMon.setToolTipText(String.valueOf(model.getMon()));
+        cbDe.setSelectedItem(dao.findByID(model.getDeTH()));
+        txCauHoi.setText(model.getDeBai());
+        txDapAn.setText(String.valueOf(model.get));
+        txtThoiLuong.setText(String.valueOf(model.getThoiLuong()));
+        txtMaNV.setText(model.getMaNV());
+        txtNgayTao.setText(DateHelper.toString(model.getNgayTao()));
+        txtGhiChu.setText(model.getGhiChu());
+    }
+
+    KhoaHoc getModel() {
+        KhoaHoc model = new KhoaHoc();
+        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+        model.setMaCD(chuyenDe.getMaCD());
+        model.setNgayKG(DateHelper.toDate(txtNgayKG.getText()));
+        model.setHocPhi(Double.valueOf(txtHocPhi.getText()));
+        model.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+        model.setGhiChu(txtGhiChu.getText());
+        model.setMaNV(ShareHelper.USER.getMaNV());
+        model.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
+        model.setMaKH(Integer.valueOf(cboChuyenDe.getToolTipText()));
+
+        return model;
+    }
+
+    void setStatus(boolean insertable) {
+        btnInsert.setEnabled(insertable);
+        btnUpdate.setEnabled(!insertable);
+        btnDelete.setEnabled(!insertable);
+        boolean first = this.index > 0;
+        boolean last = this.index < tblGridView.getRowCount() - 1;
+        btnFirst.setEnabled(!insertable && first);
+        btnPrev.setEnabled(!insertable && first);
+        btnLast.setEnabled(!insertable && last);
+        btnNext.setEnabled(!insertable && last);
+        btnStudents.setVisible(!insertable);
+    }
 }

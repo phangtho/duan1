@@ -45,9 +45,12 @@ create table cauHoi(
 	daSai nvarchar(200) not null,
 	daSai1 nvarchar(200) not null,
 	daSai2 nvarchar(200) not null,
+	maNguoiTao nchar(100) not null,
+	ngayTao date not null,
 	constraint PK_cauHoi Primary key (id),
 	constraint FK_cauHoi_boDeMon foreign key (monThi) references boDeMon(maMon),
-	constraint FK_cauHoi_boDeTH foreign key (deTH) references boDeTH(maDe)
+	constraint FK_cauHoi_boDeTH foreign key (deTH) references boDeTH(maDe),
+	constraint FK_cauHoi_giaoVien foreign key (maNguoiTao) references giaoVien(id)
 	on Update cascade
 	on Delete cascade
 )

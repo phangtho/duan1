@@ -5,6 +5,8 @@
  */
 package com.duan1.model;
 
+import com.duan1.helper.DateHelper;
+
 /**
  *
  * @author QUAN
@@ -18,6 +20,8 @@ public class CauHoi {
     String dapAnS1;
     String dapAnS2;
     String dapAnS3;
+    String maGV;
+    String ngayTao =DateHelper.toString(DateHelper.now());
 
     public CauHoi(int id, String mon, String deTH, String deBai, String dapAn, String dapAnS1, String dapAnS2, String dapAnS3) {
         this.id = id;
@@ -27,7 +31,23 @@ public class CauHoi {
         this.dapAn = dapAn;
         this.dapAnS1 = dapAnS1;
         this.dapAnS2 = dapAnS2;
-        this.dapAnS3 = dapAnS3;
+        this.dapAnS3 = dapAnS3;       
+    }
+
+    public String getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getMaGV() {
+        return maGV;
+    }
+
+    public void setMaGV(String maGV) {
+        this.maGV = maGV;
     }
 
     public CauHoi(){
