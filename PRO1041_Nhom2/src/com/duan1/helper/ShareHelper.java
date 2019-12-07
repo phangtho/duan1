@@ -5,6 +5,7 @@
  */
 package com.duan1.helper;
 
+import com.duan1.model.GiaoVien;
 import com.duan1.model.HocSinh;
 import java.awt.Image;
 import java.io.File;
@@ -49,6 +50,8 @@ public class ShareHelper {
         return new ImageIcon(path.getAbsolutePath());
     }
     public static HocSinh USER = null;
+    public static GiaoVien USERGV = null;
+    
 
     public static void logoff() {
         ShareHelper.USER = null;
