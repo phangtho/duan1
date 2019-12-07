@@ -33,6 +33,8 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         lblMhs.setText("Giáo viên");
         lblTen.setText("Giáo viên");
         lblMail.setText("Giáo viên");
+        btnKetQua.setEnabled(false);
+        tab.setSelectedIndex(1);
         }
         if(ShareHelper.USERGV==null){
         lblMhs.setText(ShareHelper.USER.getId());
