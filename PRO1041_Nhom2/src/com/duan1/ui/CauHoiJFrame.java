@@ -6,9 +6,15 @@
 package com.duan1.ui;
 
 import com.duan1.DAO.CauHoiDAO;
+import com.duan1.helper.DateHelper;
 import com.duan1.helper.DialogHelper;
+import com.duan1.helper.JDBCHelper;
 import com.duan1.model.CauHoi;
+import java.awt.HeadlessException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -95,6 +101,12 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Mã câu hỏi");
 
+        txMaCH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txMaCHActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Môn thi");
 
         jLabel4.setText("Đề tổng hợp");
@@ -115,26 +127,66 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         jLabel9.setText("Đáp án sai 3");
 
         btAdd.setText("Thêm");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
 
         btUpdate.setText("Sửa");
         btUpdate.setEnabled(false);
+        btUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUpdateActionPerformed(evt);
+            }
+        });
 
         btDelete.setText("Xóa");
         btDelete.setEnabled(false);
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
 
         btNew.setText("Mới");
+        btNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNewActionPerformed(evt);
+            }
+        });
 
         btLast.setText(">|");
         btLast.setEnabled(false);
+        btLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLastActionPerformed(evt);
+            }
+        });
 
         btNext.setText(">>");
         btNext.setEnabled(false);
+        btNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNextActionPerformed(evt);
+            }
+        });
 
         btPrev.setText("<<");
         btPrev.setEnabled(false);
+        btPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrevActionPerformed(evt);
+            }
+        });
 
         btFirst.setText("|<");
         btFirst.setEnabled(false);
+        btFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFirstActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pCapNhatLayout = new javax.swing.GroupLayout(pCapNhat);
         pCapNhat.setLayout(pCapNhatLayout);
@@ -238,20 +290,31 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
         jLabel11.setText("MÔN");
 
+        cbTimMon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTimMonActionPerformed(evt);
+            }
+        });
+
         tbMon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MÃ CH", "CÂU HỎI", "ĐÁP ÁN", "NGƯỜI TẠO", "NGÀY TẠO"
+                "MÃ CH", "MÃ ĐỀ", "CÂU HỎI", "ĐÁP ÁN"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbMon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMonMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbMon);
@@ -259,12 +322,9 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
             tbMon.getColumnModel().getColumn(0).setResizable(false);
             tbMon.getColumnModel().getColumn(0).setPreferredWidth(35);
             tbMon.getColumnModel().getColumn(1).setResizable(false);
-            tbMon.getColumnModel().getColumn(1).setPreferredWidth(100);
             tbMon.getColumnModel().getColumn(2).setResizable(false);
+            tbMon.getColumnModel().getColumn(2).setPreferredWidth(100);
             tbMon.getColumnModel().getColumn(3).setResizable(false);
-            tbMon.getColumnModel().getColumn(3).setPreferredWidth(45);
-            tbMon.getColumnModel().getColumn(4).setResizable(false);
-            tbMon.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
         javax.swing.GroupLayout pMonLayout = new javax.swing.GroupLayout(pMon);
@@ -323,8 +383,78 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
         this.load();
-        this.clear();
+        fillToComboBoxDe();
+        fillToComboBoxMon();
+        fillToComboBoxTim();
+        this.setStatus(true);
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btAddActionPerformed
+
+    private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btUpdateActionPerformed
+
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btDeleteActionPerformed
+
+    private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
+        // TODO add your handling code here
+        clear();
+        setStatus(true);
+    }//GEN-LAST:event_btNewActionPerformed
+
+    private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
+        // TODO add your handling code here:
+        index =0;
+       this.edit();
+    }//GEN-LAST:event_btFirstActionPerformed
+
+    private void btPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrevActionPerformed
+        // TODO add your handling code here:
+        index--;
+        this.edit();
+    }//GEN-LAST:event_btPrevActionPerformed
+
+    private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
+        // TODO add your handling code here:
+        index++;
+        this.edit();
+        
+    }//GEN-LAST:event_btNextActionPerformed
+
+    private void btLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLastActionPerformed
+        // TODO add your handling code here:
+        index = tbMon.getRowCount()-1;
+        this.edit();
+    }//GEN-LAST:event_btLastActionPerformed
+
+    private void cbTimMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimMonActionPerformed
+        // TODO add your handling code here:
+      fillToTableMon();
+    }//GEN-LAST:event_cbTimMonActionPerformed
+
+    private void tbMonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMonMouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) {
+            this.index = tbMon.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+                tabs.setSelectedIndex(0);
+            }
+        }
+    }//GEN-LAST:event_tbMonMouseClicked
+
+    private void txMaCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txMaCHActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txMaCHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -374,15 +504,59 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
             for (CauHoi ch : list) {
                 Object[] row = {
                     ch.getId(),
+                    ch.getDeTH(),
                     ch.getDeBai(),
-                    ch.getDapAn(),
-                    ch.getMaGV(),
-                    ch.getNgayTao()                  
+                    ch.getDapAn(),              
                 };
                 model.addRow(row);
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+        
+    }
+    
+       void insert() {
+      CauHoi model = getModel();
+
+          try   {
+                dao.insert(model);
+                this.load();
+                this.clear();
+                fillToTableMon();
+                DialogHelper.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+            
+        }
+    }
+
+    void update() {
+        CauHoi model = getModel();
+            try {
+                dao.update(model);
+                this.load();
+                fillToTableMon();
+                DialogHelper.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+               
+            }
+        
+    }
+
+    void delete() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa câu hỏi này?")) {
+            String maCH = txMaCH.getText();
+            try {
+                dao.delete(maCH);
+                this.load();
+                this.clear();
+                fillToTableMon();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                DialogHelper.alert(this, "Xóa thất bại!");         
+        }
         }
     }
     
@@ -399,54 +573,136 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
     void edit() {
         try {
-            int maCH = (int) tbMon.getValueAt(this.index, 0);
-            CauHoi model = dao.findByID(maCH);
+           Integer maCH = (Integer) tbMon.getValueAt(this.index, 0);
+            CauHoi model = dao.findById(maCH);
             if (model != null) {
                 this.setModel(model);
                 this.setStatus(false);
             }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");    e.printStackTrace();
+           
         }
     }
 
     void setModel(CauHoi model) {
         cbDe.setToolTipText(String.valueOf(model.getDeTH()));
         cbMon.setToolTipText(String.valueOf(model.getMon()));
-        cbDe.setSelectedItem(dao.findByID(model.getDeTH()));
+        cbTimMon.setToolTipText(String.valueOf(model.getMon()));
+        cbDe.setSelectedItem(model.getDeTH());
+        cbMon.setSelectedItem(model.getMon());
+        cbTimMon.setSelectedItem(model.getMon());
         txCauHoi.setText(model.getDeBai());
-        txDapAn.setText(String.valueOf(model.get));
-        txtThoiLuong.setText(String.valueOf(model.getThoiLuong()));
-        txtMaNV.setText(model.getMaNV());
-        txtNgayTao.setText(DateHelper.toString(model.getNgayTao()));
-        txtGhiChu.setText(model.getGhiChu());
+        txDapAn.setText(model.getDapAn());
+        txDapAnSai1.setText(model.getDapAnS1());
+        txDapAnSai2.setText(model.getDapAnS2());
+        txDapAnSai3.setText(model.getDapAnS3());
+        txMaCH.setText(String.valueOf(model.getId()));
     }
 
-    KhoaHoc getModel() {
-        KhoaHoc model = new KhoaHoc();
-        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
-        model.setMaCD(chuyenDe.getMaCD());
-        model.setNgayKG(DateHelper.toDate(txtNgayKG.getText()));
-        model.setHocPhi(Double.valueOf(txtHocPhi.getText()));
-        model.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-        model.setGhiChu(txtGhiChu.getText());
-        model.setMaNV(ShareHelper.USER.getMaNV());
-        model.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
-        model.setMaKH(Integer.valueOf(cboChuyenDe.getToolTipText()));
-
+    CauHoi getModel() {
+      CauHoi model = new CauHoi();
+        model.setDapAn(txDapAn.getText());
+        model.setDapAnS1(txDapAnSai1.getText());
+        model.setDapAnS2(txDapAnSai2.getText());
+        model.setDapAnS3(txDapAnSai3.getText());
+        model.setDeBai(txCauHoi.getText());
+        model.setDeTH(String.valueOf(cbDe.getSelectedItem()));
+        model.setMon(String.valueOf(cbMon.getSelectedItem()));
+        model.setNgayTao(DateHelper.toString(DateHelper.now()));
+        model.setMaGV(title);
+        model.setId(Integer.parseInt(txMaCH.getText()));
         return model;
     }
 
     void setStatus(boolean insertable) {
-        btnInsert.setEnabled(insertable);
-        btnUpdate.setEnabled(!insertable);
-        btnDelete.setEnabled(!insertable);
+        btAdd.setEnabled(insertable);
+        btUpdate.setEnabled(!insertable);
+        btDelete.setEnabled(!insertable);
+        txMaCH.setEditable(insertable);
         boolean first = this.index > 0;
-        boolean last = this.index < tblGridView.getRowCount() - 1;
-        btnFirst.setEnabled(!insertable && first);
-        btnPrev.setEnabled(!insertable && first);
-        btnLast.setEnabled(!insertable && last);
-        btnNext.setEnabled(!insertable && last);
-        btnStudents.setVisible(!insertable);
+        boolean last = this.index < tbMon.getRowCount() - 1;
+        btFirst.setEnabled(!insertable && first);
+        btPrev.setEnabled(!insertable && first);
+        btLast.setEnabled(!insertable && last);
+        btNext.setEnabled(!insertable && last);
+    }
+    
+    void fillToComboBoxDe(){
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbDe.getModel();
+           model.removeAllElements();
+    try {
+            String sql = "Select * from boDeTH";
+             ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {;
+                String de = rs.getString("maDe");
+                model.addElement(de);
+            }
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Lỗi truy vấn combo box đề tổng hợp!");
+        }
+        cbDe.setSelectedIndex(0);
+    }
+   
+    
+    
+    void fillToComboBoxMon(){
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbMon.getModel();
+       
+           model.removeAllElements();
+ 
+        try {
+            String sql = "Select * from boDeMon";
+             ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {;
+                String mon = rs.getString("maMon");
+                model.addElement(mon);
+            }
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Lỗi truy vấn combo box môn học!");
+        }
+        cbMon.setSelectedIndex(0);
+       
+    }
+        void fillToComboBoxTim(){
+             DefaultComboBoxModel model = (DefaultComboBoxModel) cbTimMon.getModel();
+             model.removeAllElements();
+ 
+        try {
+            String sql = "Select * from boDeMon";
+             ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {;
+                String mon = rs.getString("maMon");
+                model.addElement(mon);
+            }
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Loi truy vấn combo box tìm kiếm!");
+        }
+        cbTimMon.setSelectedIndex(0);
+        }
+    
+    void fillToTableMon(){
+         DefaultTableModel model = (DefaultTableModel) tbMon.getModel();
+        model.setRowCount(0);
+        
+        try {
+            String sql = "Select * from cauHoi where monThi=?";
+            ResultSet rs = JDBCHelper.executeQuery(sql, cbTimMon.getSelectedItem().toString() );
+            while (rs.next()) {;
+                Object[] row = {
+                    rs.getInt("id"), rs.getString("deTH"),
+                    rs.getString("de"),rs.getString("dapAn")
+                };
+                model.addRow(row);
+            }
+          
+        } catch (SQLException e) {
+            DialogHelper.alert(this, "Loi truy vấn môn thi!");
+        }
     }
 }
+    
+
