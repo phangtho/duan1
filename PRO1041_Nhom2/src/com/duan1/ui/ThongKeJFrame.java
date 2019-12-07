@@ -5,6 +5,10 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.ThongKeDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -14,11 +18,38 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form NguoiThi
      */
+    ThongKeDAO dao = new ThongKeDAO();
     public ThongKeJFrame(int index) {
         initComponents();
         jTabbedPane1.setSelectedIndex(index);
     }
+    void fillTableSoLanThi() {
+        DefaultTableModel model = (DefaultTableModel) tblSoLanThi.getModel();
+        model.setRowCount(0);
 
+        List<Object[]> list = dao.getSoLanThi();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+    void fillTableSoCauHoi() {
+        DefaultTableModel model = (DefaultTableModel) tblSoCauHoi.getModel();
+        model.setRowCount(0);
+
+        List<Object[]> list = dao.getSoCauHoi();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+    void fillDiemTrungBinh() {
+        DefaultTableModel model = (DefaultTableModel) tblDiemTrungBinh.getModel();
+        model.setRowCount(0);
+
+        List<Object[]> list = dao.getDiemTrungBinh();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,49 +64,62 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblSoLanThi = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        tblDiemTrungBinh = new javax.swing.JTable();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblSoCauHoi = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("SỐ LIỆU THỐNG KÊ KÌ THI");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblSoLanThi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MÃ MÔN", "SỐ NGƯỜI THI", "ĐẦU TIÊN", "SAU CÙNG"
+                "MÃ NGƯƠÌ THI", "SỐ LẦN THI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tblSoLanThi);
+        if (tblSoLanThi.getColumnModel().getColumnCount() > 0) {
+            tblSoLanThi.getColumnModel().getColumn(0).setResizable(false);
+            tblSoLanThi.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -93,12 +137,12 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("NGƯỜI THI", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblDiemTrungBinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MÃ HS", "HỌ VÀ TÊN", "ĐIỂM", "XẾP LOẠI"
+                "MÃ HS", "HỌ VÀ TÊN", "ĐIỂM TRUNG BÌNH", "XẾP LOẠI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -109,17 +153,13 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane2.setViewportView(tblDiemTrungBinh);
+        if (tblDiemTrungBinh.getColumnModel().getColumnCount() > 0) {
+            tblDiemTrungBinh.getColumnModel().getColumn(0).setResizable(false);
+            tblDiemTrungBinh.getColumnModel().getColumn(1).setResizable(false);
+            tblDiemTrungBinh.getColumnModel().getColumn(2).setResizable(false);
+            tblDiemTrungBinh.getColumnModel().getColumn(3).setResizable(false);
         }
-
-        jLabel2.setText("MÃ MÔN");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jRadioButton1.setText("Điểm từ cao xuống thấp");
 
@@ -131,10 +171,6 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jRadioButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButton2)
@@ -143,11 +179,7 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,29 +190,26 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("BẢNG ĐIỂM", jPanel2);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblSoCauHoi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MÃ ĐỀ", "TỔNG NGƯỜI THI", "ĐIỂM CAO NHẤT", "ĐIỂM THẤP NHẤT", "ĐIỂM TRUNG BÌNH"
+                "MÃ MÔN", "SỐ CÂU HỎI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(2).setResizable(false);
-            jTable3.getColumnModel().getColumn(3).setResizable(false);
-            jTable3.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane3.setViewportView(tblSoCauHoi);
+        if (tblSoCauHoi.getColumnModel().getColumnCount() > 0) {
+            tblSoCauHoi.getColumnModel().getColumn(0).setResizable(false);
+            tblSoCauHoi.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -196,7 +225,7 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("ĐIỂM TỔNG HỢP", jPanel3);
+        jTabbedPane1.addTab("CÂU HỎI", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,19 +245,25 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        fillTableSoLanThi();
+        fillTableSoCauHoi();
+        fillDiemTrungBinh();
+    }//GEN-LAST:event_formInternalFrameOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -238,8 +273,8 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable tblDiemTrungBinh;
+    private javax.swing.JTable tblSoCauHoi;
+    private javax.swing.JTable tblSoLanThi;
     // End of variables declaration//GEN-END:variables
 }

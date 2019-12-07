@@ -692,7 +692,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" pref="703" max="32767" attributes="0"/>
+                                  <Component id="jLabel1" pref="689" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
