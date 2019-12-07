@@ -125,6 +125,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         });
 
         btUpdate.setText("Sửa");
+        btUpdate.setEnabled(false);
         btUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btUpdateActionPerformed(evt);
@@ -132,6 +133,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         });
 
         btDelete.setText("Xóa");
+        btDelete.setEnabled(false);
         btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDeleteActionPerformed(evt);
@@ -421,6 +423,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         // TODO add your handling code here:
         clear();
+        
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
@@ -503,7 +506,27 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
     
     void insert() {
        HocSinh model = getModel();
-
+       if(txMa.getText().length()<5){
+           DialogHelper.alert(this, "Mã học sinh phải nhập ít nhất 5 ký tự");
+           return;
+       }
+       else if(!txMa.getText().matches("[a-zA-Z0-9]{5,}")){
+           DialogHelper.alert(this, "Mã học sinh chỉ được dùng ký tự chữ hoặc số");
+           return;
+       }
+       else if(txPass.getText().length()<5){
+           DialogHelper.alert(this, "Mật khẩu phải trên 5 ký tự");
+           return;
+       }
+       else if(txTen.getText().equals("")){
+           DialogHelper.alert(this, "Phải nhập họ tên học sinh");
+           return;
+       }
+       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+            DialogHelper.alert(this, "Nhập sai định dạng email");
+            return;
+        }
+        else{
           try   {
                 dao.insert(model);
                 this.load();
@@ -511,13 +534,26 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                 DialogHelper.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Thêm mới thất bại!");
-        
+            }
             
         }
     }
 
     void update() {
         HocSinh model = getModel();
+         if(txPass.getText().length()<5){
+           DialogHelper.alert(this, "Mật khẩu phải trên 5 ký tự");
+           return;
+       }
+       else if(txTen.getText().equals("")){
+           DialogHelper.alert(this, "Phải nhập họ tên học sinh");
+           return;
+       }
+       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+            DialogHelper.alert(this, "Nhập sai định dạng email");
+            return;
+        }
+        else{
             try {
                 dao.update(model);
                 this.load();
@@ -525,7 +561,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
                 DialogHelper.alert(this, "Cập nhật thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Cập nhật thất bại!");
-    
+            }
             }
         
     }
@@ -552,6 +588,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         txEmail.setText("");
         txGhiChu.setText("");
         txPass.setText("");
+        this.setStatus(true);
     }
 
     void edit() {
