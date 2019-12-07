@@ -115,7 +115,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
 
         txCauHoi.setColumns(20);
         txCauHoi.setRows(5);
-        txCauHoi.setText("\n\n");
         jScrollPane1.setViewportView(txCauHoi);
 
         jLabel6.setText("Đáp án");
@@ -407,7 +406,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         // TODO add your handling code here
         clear();
-        setStatus(true);
+       
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
@@ -516,9 +515,20 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         
     }
     
-       void insert() {
+       void insert(){
+           try{
       CauHoi model = getModel();
-
+         if("".equals(txCauHoi.getText())){
+           DialogHelper.alert(this, "Phải nhập câu hỏi");
+           return;
+       }
+       else if(txDapAn.getText().equals("") || txDapAnSai1.getText().equals("") || txDapAnSai2.getText().equals("") || txDapAnSai3.getText().equals("")){
+           DialogHelper.alert(this, "Phải nhập đầy đủ đáp án đúng và đáp án sai");
+           return;
+       }
+       else{
+      
+           
           try   {
                 dao.insert(model);
                 this.load();
@@ -527,12 +537,35 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                 DialogHelper.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Thêm mới thất bại!");
-            
-        }
+            }
+       }
+       }
+        
+           catch(NumberFormatException e){
+                 if(txMaCH.getText().length()<7){
+           DialogHelper.alert(this, "Mã câu hỏi phải nhập ít nhất 7 ký tự");
+           return;
+                 }
+                 else   if(!txMaCH.getText().matches("[0-9]{7,}")){
+           DialogHelper.alert(this, "Mã câu hỏi chỉ được nhập số");
+           return;
+       }
+       
+           }
     }
 
     void update() {
+        try{
         CauHoi model = getModel();
+           if("".equals(txCauHoi.getText())){
+           DialogHelper.alert(this, "Phải nhập câu hỏi");
+           return;
+       }
+       else if(txDapAn.getText().equals("") || txDapAnSai1.getText().equals("") || txDapAnSai2.getText().equals("") || txDapAnSai3.getText().equals("")){
+           DialogHelper.alert(this, "Phải nhập đầy đủ đáp án đúng và đáp án sai");
+           return;
+       }
+       else{
             try {
                 dao.update(model);
                 this.load();
@@ -540,9 +573,19 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
                 DialogHelper.alert(this, "Cập nhật thành công!");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Cập nhật thất bại!");
-               
             }
-        
+            }
+        }
+          catch(NumberFormatException e){
+                 if(txMaCH.getText().length()<7){
+           DialogHelper.alert(this, "Mã câu hỏi phải nhập ít nhất 7 ký tự");
+           return;
+                 }
+                 else   if(!txMaCH.getText().matches("[0-9]{7,}")){
+           DialogHelper.alert(this, "Mã câu hỏi chỉ được nhập số");
+           return;
+       }
+          }
     }
 
     void delete() {
@@ -569,6 +612,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
         txDapAnSai1.setText("");
         txDapAnSai2.setText("");
         txDapAnSai3.setText("");
+        setStatus(true);
     }
 
     void edit() {
