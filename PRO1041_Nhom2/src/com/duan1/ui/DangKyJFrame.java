@@ -196,7 +196,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btDangKyActionPerformed
     public void openLogin(){
-        DangNhapJFrame dk = new DangNhapJFrame();
+        MainJFrame dk = new MainJFrame();
         dk.setVisible(true);
     }
     HocSinh getModel() {
