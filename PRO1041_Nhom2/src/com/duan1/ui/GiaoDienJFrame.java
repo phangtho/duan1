@@ -405,7 +405,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator7);
 
         btnDiemTongHop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Bar chart.png"))); // NOI18N
-        btnDiemTongHop.setText("Điểm tổng hợp");
+        btnDiemTongHop.setText("Câu Hỏi");
         btnDiemTongHop.setFocusable(false);
         btnDiemTongHop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDiemTongHop.setMaximumSize(new java.awt.Dimension(123123, 60));
@@ -612,7 +612,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         mnuThongKe.add(mniTKBangDiem);
 
         mniTKDiemTongHop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Bar chart.png"))); // NOI18N
-        mniTKDiemTongHop.setText("Điểm tổng hợp");
+        mniTKDiemTongHop.setText("Câu Hỏi");
         mniTKDiemTongHop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniTKDiemTongHopActionPerformed(evt);
