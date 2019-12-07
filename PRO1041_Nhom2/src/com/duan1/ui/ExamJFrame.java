@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -154,10 +155,12 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         }
     }
     public void nopBai(){
+        SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss",Locale.ENGLISH);
+        String d = DATE_FORMATER.format(DateHelper.now());
         JOptionPane.showMessageDialog(this,"Điểm của bạn là: "+diem+"/"+list.size());
         timer.stop();
         String idhs = ShareHelper.USER.getId();
-        String ngayLam = DateHelper.now().toString();
+        String ngayLam = d;
         String baiLam = lblMon.getText();
         KetQua kq = new KetQua(idhs, diem, ngayLam, baiLam);
         KetQuaDAO kqdao = new KetQuaDAO();
@@ -165,6 +168,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         diem=0;
         this.dispose();
     }
+    
     double timeLeft = 60000;
     ActionListener countDown=new ActionListener(){
         public void actionPerformed(ActionEvent e)

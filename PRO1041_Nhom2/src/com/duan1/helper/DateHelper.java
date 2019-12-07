@@ -8,13 +8,14 @@ package com.duan1.helper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
  * @author Viet Anh
  */
 public class DateHelper {
-    static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("MM/dd/yyyy");
+    static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("MM/dd/yyyy",Locale.ENGLISH);
     public static Date toDate(String date, String... pattern) {
         try {
             if (pattern.length > 0) {

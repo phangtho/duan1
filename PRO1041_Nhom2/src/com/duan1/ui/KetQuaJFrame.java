@@ -5,19 +5,66 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.KetQuaDAO;
+import com.duan1.model.KetQua;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author ASUS
  */
 public class KetQuaJFrame extends javax.swing.JInternalFrame {
-
+    KetQuaDAO dao = new KetQuaDAO();
     /**
      * Creates new form KetQua
      */
     public KetQuaJFrame() {
         initComponents();
+        load();
     }
-
+    
+    private void load(){
+        try{
+        List<KetQua> list = new ArrayList<>();
+        list = dao.select();
+        DefaultTableModel model = (DefaultTableModel) tbLichSu.getModel();
+        model.setRowCount(0);
+        for(KetQua kq : list){
+            Object[] row = {
+                kq.getId(),
+                kq.getBaiLam(),
+                kq.getDiem(),
+                kq.getNgayLam()
+            };
+            model.addRow(row);
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Loi bang");
+        }
+    }
+    
+    private void sortTableUp(){
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tbLichSu.getModel());
+            tbLichSu.setRowSorter(sorter);
+            List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+            sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+            sorter.setSortKeys(sortKeys);
+    }
+    private void sortTableDown(){
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tbLichSu.getModel());
+            tbLichSu.setRowSorter(sorter);
+            List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+            sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));
+            sorter.setSortKeys(sortKeys);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,19 +106,35 @@ public class KetQuaJFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbLichSu.setEnabled(false);
+        tbLichSu.setInheritsPopupMenu(true);
+        tbLichSu.setRowSelectionAllowed(false);
+        tbLichSu.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbLichSu);
         if (tbLichSu.getColumnModel().getColumnCount() > 0) {
             tbLichSu.getColumnModel().getColumn(0).setResizable(false);
+            tbLichSu.getColumnModel().getColumn(0).setPreferredWidth(30);
             tbLichSu.getColumnModel().getColumn(1).setResizable(false);
             tbLichSu.getColumnModel().getColumn(2).setResizable(false);
+            tbLichSu.getColumnModel().getColumn(2).setPreferredWidth(20);
             tbLichSu.getColumnModel().getColumn(3).setResizable(false);
         }
 
         buttonGroup1.add(rbXuong);
         rbXuong.setText("Điểm từ cao xuống thấp");
+        rbXuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbXuongActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbLen);
         rbLen.setText("Điểm từ thấp lên cao");
+        rbLen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbLenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,16 +149,16 @@ public class KetQuaJFrame extends javax.swing.JInternalFrame {
                         .addComponent(rbLen))
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbXuong)
                     .addComponent(rbLen))
@@ -104,6 +167,16 @@ public class KetQuaJFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rbLenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbLenActionPerformed
+        // TODO add your handling code here:
+        sortTableUp();
+    }//GEN-LAST:event_rbLenActionPerformed
+
+    private void rbXuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbXuongActionPerformed
+        // TODO add your handling code here:
+        sortTableDown();
+    }//GEN-LAST:event_rbXuongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
