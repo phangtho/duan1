@@ -8,6 +8,7 @@ package com.duan1.ui;
 import com.duan1.DAO.CauHoiDAO;
 import com.duan1.DAO.KetQuaDAO;
 import com.duan1.helper.DateHelper;
+import com.duan1.helper.DialogHelper;
 import com.duan1.helper.ShareHelper;
 import com.duan1.model.CauHoi;
 import com.duan1.model.KetQua;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,9 +42,10 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
     int index;
     /**
      * Creates new form Exam
+     * @param text
      * @throws java.beans.PropertyVetoException
      */
-    public ExamJFrame(String text) throws PropertyVetoException {
+    public ExamJFrame(String text) {
         initComponents();
         if(text.equals("TH")){
             list = dao.findTH();
@@ -62,6 +65,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         }
         cauHoi();
         timer.start();
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
     
     void cauHoi(){
@@ -79,6 +83,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
     }
     private JPanel makePanel(String text,String t1,String t2,String t3,String t4) {
         JPanel p = new JPanel(new GridBagLayout());
+        JPanel p1 = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         JTextArea ta = new JTextArea(text, 10, 40);
         ta.setLineWrap(true);
@@ -96,18 +101,17 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         c.gridy = 0;
         c.insets = new Insets(10, 10, 10, 10);
         p.add(ta,c);
+        p1.add(da,c);
         c.gridx = 0;
         c.gridy = 1;
-        p.add(da,c);
+        p.add(p1,c);
+        p1.add(da1,c);
         c.gridx = 0;
         c.gridy = 2;
-        p.add(da1,c);
+        p1.add(da2,c);
         c.gridx = 0;
         c.gridy = 3;
-        p.add(da2,c);
-        c.gridx = 0;
-        c.gridy = 4;
-        p.add(da3,c);
+        p1.add(da3,c);
         da.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,10 +155,12 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         }
     }
     public void nopBai(){
+        SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss",Locale.ENGLISH);
+        String d = DATE_FORMATER.format(DateHelper.now());
         JOptionPane.showMessageDialog(this,"Điểm của bạn là: "+diem+"/"+list.size());
         timer.stop();
         String idhs = ShareHelper.USER.getId();
-        String ngayLam = DateHelper.now().toString();
+        String ngayLam = d;
         String baiLam = lblMon.getText();
         KetQua kq = new KetQua(idhs, diem, ngayLam, baiLam);
         KetQuaDAO kqdao = new KetQuaDAO();
@@ -162,6 +168,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         diem=0;
         this.dispose();
     }
+    
     double timeLeft = 60000;
     ActionListener countDown=new ActionListener(){
         public void actionPerformed(ActionEvent e)
@@ -171,6 +178,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
             lblTime.setText(df.format(timeLeft));
             if(timeLeft<=0)
             {
+                DialogHelper.alert(rootPane, "Bạn đã hết thời gian làm bài!");
                 timer.stop();
                 nopBai();
             }
@@ -204,7 +212,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximumSize(new java.awt.Dimension(700, 500));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(700, 500));
+        setPreferredSize(new java.awt.Dimension(720, 550));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(153, 153, 153)));
 
@@ -238,7 +246,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +277,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         lblTime.setForeground(new java.awt.Color(204, 0, 0));
         lblTime.setText("Label3");
 
-        lblMon.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblMon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblMon.setText("Môn thi:");
 
         jPanel5.setLayout(new java.awt.BorderLayout());
@@ -315,7 +323,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
                                 .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -328,8 +336,12 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try{
         index = tabs.getSelectedIndex();
-        if(index<list.size()){
+        if(index<list.size()-1){
         tabs.setSelectedIndex(index+1);
+        }
+        if(index==list.size()-1){
+        tabs.setSelectedIndex(0);
+        index=0;
         }
         }
         catch(Exception e){
@@ -338,7 +350,9 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        nopBai();
+        int opt = JOptionPane.showConfirmDialog(this, "Bạn muốn nộp  bài ?");
+        if(opt==0){
+        nopBai();}
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void tabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabsMouseClicked
@@ -351,6 +365,10 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         index = tabs.getSelectedIndex();
         if(index>0){
         tabs.setSelectedIndex(index-1);
+        }
+        if(index==0){
+        tabs.setSelectedIndex(list.size()-1);
+        index=list.size()-1;
         }
         }catch(Exception e){
         }

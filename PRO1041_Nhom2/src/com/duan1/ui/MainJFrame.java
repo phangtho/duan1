@@ -5,11 +5,12 @@
  */
 package com.duan1.ui;
 
+import com.duan1.DAO.GiaoVienDAO;
 import com.duan1.DAO.HocSinhDAO;
 import com.duan1.helper.DialogHelper;
 import com.duan1.helper.ShareHelper;
+import com.duan1.model.GiaoVien;
 import com.duan1.model.HocSinh;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +25,8 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    HocSinhDAO dao = new HocSinhDAO();
+    HocSinhDAO hsdao = new HocSinhDAO();
+    GiaoVienDAO gvdao = new GiaoVienDAO();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -191,10 +193,23 @@ public class MainJFrame extends javax.swing.JFrame {
         dk.setVisible(true);
     }
      void login() {
-          String hsid = txUser.getText(); 
+        String id = txUser.getText(); 
         String matKhau = new String(txPass.getPassword()); 
-        try { 
-            HocSinh hocSinh = dao.findByID(hsid);
+        try {
+            GiaoVien gv = gvdao.findByID(id);
+            if(gv != null){
+                String matKhau2 = gv.getPass().trim(); 
+                if(matKhau.equals(matKhau2)){ 
+                    ShareHelper.USERGV = gv; 
+                    DialogHelper.alert(this, "Đăng nhập thành công!"); 
+                    this.dispose();
+                    openMain();
+                } 
+                else{
+                    DialogHelper.alert(this, "Sai mật khẩu!");
+                } 
+            }
+            HocSinh hocSinh = hsdao.findByID(id);
             if(hocSinh != null){ 
                 String matKhau2 = hocSinh.getMatKhau().trim(); 
                 if(matKhau.equals(matKhau2)){ 
@@ -207,7 +222,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     DialogHelper.alert(this, "Sai mật khẩu!");
                 } 
             } 
-            else{ 
+            else if(gv == null && hocSinh == null){ 
                 DialogHelper.alert(this, "Sai tên đăng nhập!"); 
             } 
         }  

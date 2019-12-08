@@ -8,7 +8,9 @@ package com.duan1.ui;
 import com.duan1.helper.DialogHelper;
 import com.duan1.helper.ShareHelper;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -26,6 +28,22 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         tab.setEnabledAt(1, true);
         ImageIcon icon = new ImageIcon(ShareHelper.APP_ICON);
         setIconImage(ShareHelper.APP_ICON);
+        btn(false);
+        if(ShareHelper.USER == null){
+        lblMhs.setText("Giáo viên");
+        lblTen.setText("Giáo viên");
+        lblMail.setText("Giáo viên");
+        btnKetQua.setEnabled(false);
+        tab.setSelectedIndex(1);
+        }
+        if(ShareHelper.USERGV==null){
+        lblMhs.setText(ShareHelper.USER.getId());
+        lblTen.setText(ShareHelper.USER.getTen());
+        lblMail.setText(ShareHelper.USER.getEmail());
+        tab.setEnabled(false);
+        mnuQuanLy.setEnabled(false);
+        mnuThongKe.setEnabled(false);
+        }
     }
 
     /**
@@ -44,6 +62,9 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         btnLBTongHop = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         btnLBTheoMon = new javax.swing.JButton();
+        btnLy = new javax.swing.JButton();
+        btnToan = new javax.swing.JButton();
+        btnHoa = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         btnKetQua = new javax.swing.JButton();
@@ -62,11 +83,9 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblMhs = new javax.swing.JLabel();
+        lblTen = new javax.swing.JLabel();
+        lblMail = new javax.swing.JLabel();
         hocsinh = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jSeparator4 = new javax.swing.JToolBar.Separator();
@@ -135,6 +154,27 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
             }
         });
 
+        btnLy.setText("LÝ");
+        btnLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLyActionPerformed(evt);
+            }
+        });
+
+        btnToan.setText("TOÁN");
+        btnToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToanActionPerformed(evt);
+            }
+        });
+
+        btnHoa.setText("HOÁ");
+        btnHoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -149,6 +189,14 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                 .addGap(115, 115, 115)
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(145, 145, 145))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(btnToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLy, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(172, 172, 172)
+                .addComponent(btnHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +207,12 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLBTongHop, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLBTheoMon, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
+                .addGap(93, 93, 93)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLy, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jToolBar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -261,16 +314,11 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel31.setText("Email:");
 
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel32.setText("Trạng thái:");
+        lblMhs.setText("jLabel4");
 
-        jLabel4.setText("jLabel4");
+        lblTen.setText("jLabel5");
 
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setText("jLabel6");
-
-        jLabel7.setText("jLabel7");
+        lblMail.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -284,14 +332,12 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel29)
                             .addComponent(jLabel30)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32))
+                            .addComponent(jLabel31))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblMhs, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(lblTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
@@ -304,19 +350,15 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(lblMhs))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jLabel5))
+                    .addComponent(lblTen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel7))
+                    .addComponent(lblMail))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -331,8 +373,11 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -656,7 +701,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
 
     private void btnLBTheoMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBTheoMonActionPerformed
         // TODO add your handling code here:
-        openMonThi();
+        btn(true);
     }//GEN-LAST:event_btnLBTheoMonActionPerformed
 
     private void btnDiemTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiemTongHopActionPerformed
@@ -741,8 +786,8 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         ExamJFrame ef;
         try {
             ef = new ExamJFrame("TH");
-            jDesktopPane2.add(ef);
-            ef.setVisible(true);
+            fc(ef);
+            btn(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi mở exam");
         }
@@ -752,12 +797,57 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         openGioiThieu();
     }//GEN-LAST:event_mniGioiThieuActionPerformed
-    public void openMonThi(){
-       ChonMonJFrame cm = new ChonMonJFrame();
-       jDesktopPane2.add(cm);
-       cm.setVisible(true); 
+
+    private void btnToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToanActionPerformed
+        // TODO add your handling code here:
+        ExamJFrame ef;
+        try {
+            ef = new ExamJFrame("M01");
+            fc(ef);
+            btn(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi mở exam");
+        }
+    }//GEN-LAST:event_btnToanActionPerformed
+
+    private void btnLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLyActionPerformed
+        // TODO add your handling code here:
+        ExamJFrame ef;
+        try {
+            ef = new ExamJFrame("M02");
+            fc(ef);
+            btn(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi mở exam");
+        }
+    }//GEN-LAST:event_btnLyActionPerformed
+
+    private void btnHoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaActionPerformed
+        // TODO add your handling code here:
+        ExamJFrame ef;
+        try {
+            ef = new ExamJFrame("M03");
+            fc(ef);
+            btn(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi mở exam");
+        }
+    }//GEN-LAST:event_btnHoaActionPerformed
+
+    public void fc(JInternalFrame fc){
+        fc.setResizable(false);
+        fc.setClosable(false);
+        fc.setMaximizable(false);
+        fc.setIconifiable(false);
+        jDesktopPane2.add(fc);
+        fc.setVisible(true);
     }
     
+    public void btn(boolean b){
+        btnToan.setVisible(b);
+        btnLy.setVisible(b);
+        btnHoa.setVisible(b);
+    }
     public void exit() {
         if (DialogHelper.confirm(this, "Bạn thực sự muốn kết thúc?")) {
             System.exit(0);
@@ -856,12 +946,15 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnDangXuatGV;
     private javax.swing.JButton btnDiemTongHop;
+    private javax.swing.JButton btnHoa;
     private javax.swing.JButton btnHocSinh;
     private javax.swing.JButton btnKetQua;
     private javax.swing.JButton btnLBTheoMon;
     private javax.swing.JButton btnLBTongHop;
+    private javax.swing.JButton btnLy;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnThoat2;
+    private javax.swing.JButton btnToan;
     private javax.swing.JPanel hocsinh;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
@@ -874,11 +967,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -902,6 +990,9 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lblMail;
+    private javax.swing.JLabel lblMhs;
+    private javax.swing.JLabel lblTen;
     private javax.swing.JMenuItem mniDangNhap;
     private javax.swing.JMenuItem mniDangXuat;
     private javax.swing.JMenuItem mniDoiMatKhau;
