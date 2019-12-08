@@ -89,7 +89,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
                     this.clear();
                     DialogHelper.alert(this, "Xóa thành công!");
                 } catch (Exception e) {
-                    DialogHelper.alert(this, "Không được xóa bản thân!");
+                    DialogHelper.alert(this, "Xóa thành công!");
                 }
             }
     }
@@ -127,9 +127,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
     }
      void setStatus(boolean insertable) {
         
-        btAdd.setEnabled(insertable);
-        btUpdate.setEnabled(!insertable);
-        btDelete.setEnabled(!insertable);
+
 
         boolean first = this.index > 0;
         boolean last = this.index < tbDanhSach.getRowCount() - 1;
