@@ -7,9 +7,7 @@ package com.duan1.ui;
 
 import com.duan1.DAO.GiaoVienDAO;
 import com.duan1.helper.DialogHelper;
-import com.duan1.helper.ShareHelper;
 import com.duan1.model.GiaoVien;
-import com.duan1.model.HocSinh;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,7 +46,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
         GiaoVien model = getModel();
 
         String confirm = new String(txXacNhan.getPassword());
-        if (confirm.equals(model.getPass())) {
+        if (confirm.equals(model.getPass().trim())) {
             try {
                 dao.insert(model);
                 this.load();
@@ -94,13 +92,17 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
             }
     }
     void clear() {
-        this.setModel(new GiaoVien());
+        txMa.setText("");
+        txTen.setText("");
+        txPass.setText("");
+        txXacNhan.setText("");
+        txEmail.setText("");
     }
     void setModel(GiaoVien model) {
         txMa.setText(model.getId().trim());
         txTen.setText(model.getTen());
-        txPass.setText(model.getPass());
-        txXacNhan.setText(model.getPass());
+        txPass.setText(model.getPass().trim());
+        txXacNhan.setText(model.getPass().trim());
         txEmail.setText(model.getEmail());
     }
 
@@ -434,6 +436,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         // TODO add your handling code here:
         clear();
+        this.setStatus(true);
     }//GEN-LAST:event_btNewActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
