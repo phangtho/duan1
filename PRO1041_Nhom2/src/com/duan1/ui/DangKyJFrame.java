@@ -106,30 +106,31 @@ public class DangKyJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txEmail)
-                                    .addComponent(txPass)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btDangKy)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btNew)
-                                        .addGap(65, 65, 65)
-                                        .addComponent(btQuayLai))
-                                    .addComponent(txUser)
-                                    .addComponent(txTenHS)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(7, 7, 7)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txXacNhan)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txEmail)
+                                .addComponent(txPass)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btDangKy)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btNew)
+                                    .addGap(65, 65, 65)
+                                    .addComponent(btQuayLai))
+                                .addComponent(txUser)
+                                .addComponent(txTenHS)))
                         .addGap(0, 102, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -182,6 +183,31 @@ public class DangKyJFrame extends javax.swing.JFrame {
     private void btDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangKyActionPerformed
         // TODO add your handling code here:
         HocSinh model = getModel();
+        if(txUser.getText().length()<5){
+           DialogHelper.alert(this, "Mã học sinh phải nhập ít nhất 5 ký tự");
+           return;
+       }
+       else if(!txUser.getText().matches("[a-zA-Z0-9]{5,}")){
+           DialogHelper.alert(this, "Mã học sinh chỉ được dùng ký tự chữ hoặc số");
+           return;
+       }
+       else if(txPass.getText().length()<5){
+           DialogHelper.alert(this, "Mật khẩu phải trên 5 ký tự");
+           return;
+       }
+       else if(txTenHS.getText().equals("")){
+           DialogHelper.alert(this, "Phải nhập họ tên học sinh");
+           return;
+       }
+       else if(!txTenHS.getText().matches("[a-zA-Z ]{1,}")){
+           DialogHelper.alert(this, "Tên học sinh chỉ được dùng ký tự chữ và khoảng trắng");
+           return;
+       }
+       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+            DialogHelper.alert(this, "Nhập sai định dạng email");
+            return;
+        }
+       else{
         String confirm = new String(txXacNhan.getPassword());
         if(confirm.equals(model.getMatKhau())){
             try{
@@ -192,8 +218,9 @@ public class DangKyJFrame extends javax.swing.JFrame {
                 DialogHelper.alert(this, "Thêm mới thất bại!");
             }
         } else {
-            DialogHelper.alert(this, "Thêm mới thất bại!");
+            DialogHelper.alert(this, "Xác nhận mật khẩu không khớp! Thêm mới thất bại!");
         }
+       }
     }//GEN-LAST:event_btDangKyActionPerformed
     public void openLogin(){
         MainJFrame dk = new MainJFrame();
