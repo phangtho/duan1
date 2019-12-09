@@ -805,7 +805,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         ExamJFrame ef;
         try {
             ef = new ExamJFrame("TH");
-            fc(ef);
+            fc(ef,false);
             btn(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi mở exam");
@@ -822,7 +822,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         ExamJFrame ef;
         try {
             ef = new ExamJFrame("M01");
-            fc(ef);
+            fc(ef,false);
             btn(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi mở exam");
@@ -834,7 +834,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         ExamJFrame ef;
         try {
             ef = new ExamJFrame("M02");
-            fc(ef);
+            fc(ef,false);
             btn(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi mở exam");
@@ -846,18 +846,18 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         ExamJFrame ef;
         try {
             ef = new ExamJFrame("M03");
-            fc(ef);
+            fc(ef,false);
             btn(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi mở exam");
         }
     }//GEN-LAST:event_btnHoaActionPerformed
 
-    public void fc(JInternalFrame fc){
-        fc.setResizable(false);
-        fc.setClosable(false);
-        fc.setMaximizable(false);
-        fc.setIconifiable(false);
+    public void fc(JInternalFrame fc,boolean b){
+        fc.setResizable(b);
+        fc.setClosable(b);
+        fc.setMaximizable(b);
+        fc.setIconifiable(b);
         jDesktopPane2.add(fc);
         fc.setVisible(true);
         fc.setLocation((jDesktopPane2.getWidth() - fc.getWidth())/2,(jDesktopPane2.getHeight()-fc.getHeight())/2);
@@ -880,26 +880,22 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
 
     public void openKetQua() {
         KetQuaJFrame kq = new KetQuaJFrame();
-        jDesktopPane2.add(kq);
-        kq.setVisible(true);
+        fc(kq,true);
     }
 
     public void openQLCauHoi() {
         CauHoiJFrame ch = new CauHoiJFrame();
-        jDesktopPane2.add(ch);
-        ch.setVisible(true);
+        fc(ch,true);
     }
 
     public void openThongKe(int index) {
         ThongKeJFrame tk = new ThongKeJFrame(index);
-        jDesktopPane2.add(tk);
-        tk.setVisible(true);
+        fc(tk,true);
     }
 
     public void openQLHocSinh() {
         QLHocSinhJFrame qlhs = new QLHocSinhJFrame();
-        jDesktopPane2.add(qlhs);
-        qlhs.setVisible(true);
+        fc(qlhs,true);
     }
 
     public void logoff() {
