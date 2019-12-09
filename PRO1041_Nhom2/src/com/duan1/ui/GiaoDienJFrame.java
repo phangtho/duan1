@@ -841,6 +841,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         fc.setIconifiable(false);
         jDesktopPane2.add(fc);
         fc.setVisible(true);
+        fc.setLocation((jDesktopPane2.getWidth() - fc.getWidth())/2,(jDesktopPane2.getHeight()-fc.getHeight())/2);
     }
     
     public void btn(boolean b){

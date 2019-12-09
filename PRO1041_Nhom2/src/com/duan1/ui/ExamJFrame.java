@@ -17,7 +17,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,7 +77,6 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
             listch.add(list.get(i).getDapAnS3());
             Collections.shuffle(listch);
             tabs.addTab("Câu"+(i+1),makePanel(list.get(i).getDeBai(),listch.get(0).toString(),listch.get(1).toString(),listch.get(2).toString(),listch.get(3).toString()));
-
         }
     }
     private JPanel makePanel(String text,String t1,String t2,String t3,String t4) {
@@ -184,7 +182,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
             }
         }
     };
-    Timer timer=new Timer(100, countDown);
+    Timer timer = new Timer(100, countDown);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
