@@ -34,7 +34,7 @@ public class GiaoVienDAO {
         model.getId());
     }
     public void delete(String id){
-        String sql="DELETE FROM GiaoVien WHERE id=?";
+        String sql="DELETE FROM giaoVien WHERE id=?";
         JDBCHelper.executeUpdate(sql, id);
     }
     public List<GiaoVien> select(){
@@ -42,7 +42,7 @@ public class GiaoVienDAO {
         return select(sql);
     }
     public GiaoVien findByID(String id){
-        String sql = "SELECT * FROM GiaoVien WHERE id=?";
+        String sql = "SELECT * FROM giaoVien WHERE id=?";
         List<GiaoVien> list = select(sql, id);
         return list.size() > 0 ? list.get(0) : null;
     }
