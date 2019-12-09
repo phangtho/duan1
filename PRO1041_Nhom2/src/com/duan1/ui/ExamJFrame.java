@@ -167,7 +167,7 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         this.dispose();
     }
     
-    double timeLeft = 60000;
+    int timeLeft = ShareHelper.timeLeft;
     ActionListener countDown=new ActionListener(){
         public void actionPerformed(ActionEvent e)
         {

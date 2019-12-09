@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
  */
 public class ShareHelper {
 
-    public static double chamDiem;
+    public static int timeLeft=60000;
     public static final Image APP_ICON;
 
     static {

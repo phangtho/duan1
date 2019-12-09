@@ -406,7 +406,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     private void btNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNewActionPerformed
         // TODO add your handling code here
         clear();
-       
     }//GEN-LAST:event_btNewActionPerformed
 
     private void btFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFirstActionPerformed
