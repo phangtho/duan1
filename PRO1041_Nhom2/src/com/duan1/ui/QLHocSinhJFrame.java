@@ -111,6 +111,12 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Địa chỉ email");
 
+        txEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txEmailActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Ghi chú");
 
         txGhiChu.setColumns(20);
@@ -443,6 +449,10 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tbDanhSachMouseClicked
 
+    private void txEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
@@ -526,7 +536,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
            DialogHelper.alert(this, "Tên học sinh chỉ được dùng ký tự chữ và khoảng trắng");
            return;
        }
-       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+       else if (!txEmail.getText().matches("\\w+@\\w+\\.\\w{2,3}")) {
             DialogHelper.alert(this, "Nhập sai định dạng email");
             return;
         }
