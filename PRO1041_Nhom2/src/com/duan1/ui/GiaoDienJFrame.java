@@ -7,10 +7,15 @@ package com.duan1.ui;
 
 import com.duan1.helper.DialogHelper;
 import com.duan1.helper.ShareHelper;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,10 +35,8 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         setIconImage(ShareHelper.APP_ICON);
         btn(false);
         if(ShareHelper.USER == null){
-        lblMhs.setText("Giáo viên");
-        lblTen.setText("Giáo viên");
-        lblMail.setText("Giáo viên");
         btnKetQua.setEnabled(false);
+        tab.setEnabled(false);
         tab.setSelectedIndex(1);
         }
         if(ShareHelper.USERGV==null){
@@ -44,6 +47,13 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         mnuQuanLy.setEnabled(false);
         mnuThongKe.setEnabled(false);
         }
+        new Timer(1000, new ActionListener() { 
+            SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a"); 
+            @Override 
+            public void actionPerformed(ActionEvent e) { 
+                lblDongHo.setText(format.format(new Date())); 
+            } 
+        }).start(); 
     }
 
     /**
@@ -76,6 +86,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lblDongHo = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -192,7 +203,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(btnToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(btnLy, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(172, 172, 172)
                 .addComponent(btnHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,7 +223,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                     .addComponent(btnLy, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         jToolBar2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -278,6 +289,8 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Alarm.png"))); // NOI18N
 
+        lblDongHo.setText("Time");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -286,13 +299,19 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(lblDongHo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -405,8 +424,8 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)))
-                .addGap(4, 4, 4)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tab.addTab("Học sinh", jPanel1);
@@ -450,7 +469,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator7);
 
         btnDiemTongHop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Bar chart.png"))); // NOI18N
-        btnDiemTongHop.setText("Câu Hỏi");
+        btnDiemTongHop.setText("Thống Kê Câu Hỏi");
         btnDiemTongHop.setFocusable(false);
         btnDiemTongHop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDiemTongHop.setMaximumSize(new java.awt.Dimension(123123, 60));
@@ -990,6 +1009,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel lblDongHo;
     private javax.swing.JLabel lblMail;
     private javax.swing.JLabel lblMhs;
     private javax.swing.JLabel lblTen;

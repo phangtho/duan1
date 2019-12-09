@@ -103,7 +103,7 @@ public class ThongKeJFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "MÃ NGƯƠÌ THI", "SỐ LẦN THI"
+                "MÃ NGƯỜI THI", "SỐ LẦN THI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
