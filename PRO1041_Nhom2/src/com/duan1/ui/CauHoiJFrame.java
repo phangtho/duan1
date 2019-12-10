@@ -515,7 +515,6 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
     }
     
        void insert(){
-           try{
       CauHoi model = getModel();
          if("".equals(txCauHoi.getText())){
            DialogHelper.alert(this, "Phải nhập câu hỏi");
@@ -539,19 +538,7 @@ public class CauHoiJFrame extends javax.swing.JInternalFrame {
             }
        }
        }
-        
-           catch(NumberFormatException e){
-                 if(txMaCH.getText().length()<7){
-           DialogHelper.alert(this, "Mã câu hỏi phải nhập ít nhất 7 ký tự");
-           return;
-                 }
-                 else   if(!txMaCH.getText().matches("[0-9]{7,}")){
-           DialogHelper.alert(this, "Mã câu hỏi chỉ được nhập số");
-           return;
-       }
-       
-           }
-    }
+    
 
     void update() {
         try{
