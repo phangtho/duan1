@@ -118,7 +118,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         mniDangNhap = new javax.swing.JMenuItem();
         mniDangXuat = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        mniDoiMatKhau = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         mniThoat = new javax.swing.JMenuItem();
         mnuQuanLy = new javax.swing.JMenu();
@@ -133,7 +132,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         mniTKDiemTongHop = new javax.swing.JMenuItem();
         mnuTroGiup = new javax.swing.JMenu();
         mniGioiThieu = new javax.swing.JMenuItem();
-        mniHuongDan = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -605,10 +603,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         });
         mnuHeThong.add(mniDangXuat);
         mnuHeThong.add(jSeparator1);
-
-        mniDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Refresh.png"))); // NOI18N
-        mniDoiMatKhau.setText("Đổi mật khẩu");
-        mnuHeThong.add(mniDoiMatKhau);
         mnuHeThong.add(jSeparator2);
 
         mniThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Stop.png"))); // NOI18N
@@ -696,10 +690,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
             }
         });
         mnuTroGiup.add(mniGioiThieu);
-
-        mniHuongDan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Globe.png"))); // NOI18N
-        mniHuongDan.setText("Hướng dẫn phần mềm");
-        mnuTroGiup.add(mniHuongDan);
 
         jMenuBar1.add(mnuTroGiup);
 
@@ -1012,9 +1002,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblTen;
     private javax.swing.JMenuItem mniDangNhap;
     private javax.swing.JMenuItem mniDangXuat;
-    private javax.swing.JMenuItem mniDoiMatKhau;
     private javax.swing.JMenuItem mniGioiThieu;
-    private javax.swing.JMenuItem mniHuongDan;
     private javax.swing.JMenuItem mniQLiCauHoi;
     private javax.swing.JMenuItem mniQLiGiaoVien;
     private javax.swing.JMenuItem mniQLiHocSinh;
