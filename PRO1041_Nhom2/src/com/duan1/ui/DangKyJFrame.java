@@ -8,7 +8,6 @@ package com.duan1.ui;
 import com.duan1.DAO.HocSinhDAO;
 import com.duan1.helper.DialogHelper;
 import com.duan1.model.HocSinh;
-import java.awt.Dialog;
 
 /**
  *
@@ -23,6 +22,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setSize(512, 355);
+        
     }
 
     /**
@@ -48,6 +48,8 @@ public class DangKyJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txXacNhan = new javax.swing.JPasswordField();
         txEmail = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtNgaySinh = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -97,6 +99,17 @@ public class DangKyJFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Tên đăng nhập:");
 
+        jLabel7.setText("Ngày sinh (M/D/Y):");
+
+        txtNgaySinh.setToolTipText("");
+        txtNgaySinh.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtNgaySinhInputMethodTextChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,30 +120,30 @@ public class DangKyJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
-                                .addGap(7, 7, 7)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txXacNhan)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txEmail)
-                                .addComponent(txPass)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btDangKy)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btNew)
-                                    .addGap(65, 65, 65)
-                                    .addComponent(btQuayLai))
-                                .addComponent(txUser)
-                                .addComponent(txTenHS)))
+                                    .addGap(21, 21, 21)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel4)))
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txXacNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                            .addComponent(txEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txPass, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txUser, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txTenHS, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btDangKy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btNew)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btQuayLai))
+                            .addComponent(txtNgaySinh))
                         .addGap(0, 102, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -156,14 +169,18 @@ public class DangKyJFrame extends javax.swing.JFrame {
                     .addComponent(txXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDangKy)
                     .addComponent(btNew)
                     .addComponent(btQuayLai))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -203,7 +220,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
            DialogHelper.alert(this, "Tên học sinh chỉ được dùng ký tự chữ và khoảng trắng");
            return;
        }
-       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+       else if (!txEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
             DialogHelper.alert(this, "Nhập sai định dạng email");
             return;
         }
@@ -222,6 +239,10 @@ public class DangKyJFrame extends javax.swing.JFrame {
         }
        }
     }//GEN-LAST:event_btDangKyActionPerformed
+
+    private void txtNgaySinhInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtNgaySinhInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgaySinhInputMethodTextChanged
     public void openLogin(){
         MainJFrame dk = new MainJFrame();
         dk.setVisible(true);
@@ -232,6 +253,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
         model.setId(txUser.getText());
         model.setMatKhau(new String(txXacNhan.getPassword()));
         model.setEmail(txEmail.getText());
+        model.setNgaySinh(txtNgaySinh.getText());
         return model;
     }
     public void clear() {
@@ -240,6 +262,7 @@ public class DangKyJFrame extends javax.swing.JFrame {
         txPass.setText("");
         txXacNhan.setText("");
         txUser.setText("");
+        txtNgaySinh.setText("");
     }
     /**
      * @param args the command line arguments
@@ -287,10 +310,12 @@ public class DangKyJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txEmail;
     private javax.swing.JPasswordField txPass;
     private javax.swing.JTextField txTenHS;
     private javax.swing.JTextField txUser;
     private javax.swing.JPasswordField txXacNhan;
+    private javax.swing.JTextField txtNgaySinh;
     // End of variables declaration//GEN-END:variables
 }

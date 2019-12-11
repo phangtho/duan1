@@ -64,7 +64,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
            DialogHelper.alert(this, "Tên giáo viên chỉ được dùng ký tự chữ và khoảng trắng");
            return;
        }
-       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+       else if (!txEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
             DialogHelper.alert(this, "Nhập sai định dạng email");
             return;
        }
@@ -104,7 +104,7 @@ public class GiaoVienJFrame extends javax.swing.JInternalFrame {
            DialogHelper.alert(this, "Tên giáo viên chỉ được dùng ký tự chữ và khoảng trắng");
            return;
        }
-       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+       else if (!txEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
             DialogHelper.alert(this, "Nhập sai định dạng email");
             return;
        }

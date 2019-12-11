@@ -536,7 +536,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
            DialogHelper.alert(this, "Tên học sinh chỉ được dùng ký tự chữ và khoảng trắng");
            return;
        }
-       else if (!txEmail.getText().matches("\\w+@\\w+\\.\\w{2,3}")) {
+       else if (!txEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
             DialogHelper.alert(this, "Nhập sai định dạng email");
             return;
         }
@@ -563,7 +563,7 @@ public class QLHocSinhJFrame extends javax.swing.JInternalFrame {
            DialogHelper.alert(this, "Phải nhập họ tên học sinh");
            return;
        }
-       else if (!txEmail.getText().matches("\\w+@+\\w+(\\.+\\w){1,2}")) {
+       else if (!txEmail.getText().matches("\\w+@\\w+(\\.\\w+){1,2}")) {
             DialogHelper.alert(this, "Nhập sai định dạng email");
             return;
         }
