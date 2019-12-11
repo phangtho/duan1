@@ -34,7 +34,7 @@ create table hocSinh(
 	constraint PK_hocSinh Primary key (id)
 )
 
-insert into hocSinh values ('quanld','abc','Quan','Quanld@fpt.edu')
+insert into hocSinh values ('quanld','abc','Quan','true','05/15/1997','Quanld@fpt.edu','')
 
 if OBJECT_ID('ketQua') is not null
 drop table ketQua
