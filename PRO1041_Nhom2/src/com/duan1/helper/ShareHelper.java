@@ -54,6 +54,7 @@ public class ShareHelper {
     
 
     public static void logoff() {
+        ShareHelper.USERGV = null;
         ShareHelper.USER = null;
     }
 

@@ -97,7 +97,8 @@ public class ExamJFrame extends javax.swing.JInternalFrame {
         bg1.add(da3);
         c.gridx = 0;
         c.gridy = 0;
-        c.insets = new Insets(10, 10, 10, 10);
+        c.anchor = GridBagConstraints.WEST;
+        c.insets = new Insets(5, 0, 5, 5);
         p.add(ta,c);
         p1.add(da,c);
         c.gridx = 0;

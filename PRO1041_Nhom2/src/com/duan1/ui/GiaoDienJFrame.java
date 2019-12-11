@@ -115,7 +115,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuHeThong = new javax.swing.JMenu();
-        mniDangNhap = new javax.swing.JMenuItem();
         mniDangXuat = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -201,7 +200,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(btnToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLy, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(172, 172, 172)
                 .addComponent(btnHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,7 +308,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(lblDongHo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -423,7 +422,7 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)))
                 .addGap(20, 20, 20)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tab.addTab("Học sinh", jPanel1);
@@ -585,15 +584,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
 
         mnuHeThong.setText("Hệ thống");
 
-        mniDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Key.png"))); // NOI18N
-        mniDangNhap.setText("Đăng nhập");
-        mniDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniDangNhapActionPerformed(evt);
-            }
-        });
-        mnuHeThong.add(mniDangNhap);
-
         mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/duan1/icon/Log out.png"))); // NOI18N
         mniDangXuat.setText("Đăng xuất");
         mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -733,16 +723,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         openKetQua();
     }//GEN-LAST:event_btnKetQuaActionPerformed
 
-    private void mniThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThoatActionPerformed
-        // TODO add your handling code here:
-        exit();
-    }//GEN-LAST:event_mniThoatActionPerformed
-
-    private void mniDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangNhapActionPerformed
-        // TODO add your handling code here:
-        openLogin();
-    }//GEN-LAST:event_mniDangNhapActionPerformed
-
     private void mniQLiHocSinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLiHocSinhActionPerformed
         // TODO add your handling code here:
         openQLHocSinh();
@@ -784,11 +764,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         logoff();
     }//GEN-LAST:event_btnDangXuatActionPerformed
-
-    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
-        // TODO add your handling code here:
-        logoff();
-    }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void btnLBTongHopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBTongHopActionPerformed
         // TODO add your handling code here:
@@ -843,6 +818,16 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHoaActionPerformed
 
+    private void mniThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThoatActionPerformed
+        // TODO add your handling code here:
+        exit();
+    }//GEN-LAST:event_mniThoatActionPerformed
+
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
+        // TODO add your handling code here:
+        logoff();
+    }//GEN-LAST:event_mniDangXuatActionPerformed
+
     public void fc(JInternalFrame fc,boolean b){
         fc.setResizable(b);
         fc.setClosable(b);
@@ -890,11 +875,13 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
 
     public void logoff() {
         ShareHelper.logoff();
+        this.dispose();
         this.openLogin();
     }
 
     public void openLogin() {
-        this.dispose();
+        MainJFrame dk = new MainJFrame();
+        dk.setVisible(true);
     }
 
     /**
@@ -1000,7 +987,6 @@ public class GiaoDienJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblMail;
     private javax.swing.JLabel lblMhs;
     private javax.swing.JLabel lblTen;
-    private javax.swing.JMenuItem mniDangNhap;
     private javax.swing.JMenuItem mniDangXuat;
     private javax.swing.JMenuItem mniGioiThieu;
     private javax.swing.JMenuItem mniQLiCauHoi;
