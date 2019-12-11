@@ -7,7 +7,6 @@ package com.duan1.ui;
 
 import com.duan1.DAO.KetQuaDAO;
 import com.duan1.model.KetQua;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
